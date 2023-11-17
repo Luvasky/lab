@@ -114,13 +114,16 @@ function GenerarOrden() {
       paqueteReq: nombresPaquetes, // Corrige el nombre de la variable aquí
     };
 
-    await fetch("http://localhost:3000/apiLNFG/sumarPrecioPaquetes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody), // Enviando el objeto JSON
-    })
+    await fetch(
+      "https://apilnfg-production.up.railway.app/apiLNFG/sumarPrecioPaquetes",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody), // Enviando el objeto JSON
+      }
+    )
       .then((res) => res.json())
       .then((respuesta) => {
         console.log(respuesta.respuesta[0].suma_precios);
@@ -152,13 +155,16 @@ function GenerarOrden() {
       examnesReq: examenesSeleccionados,
     };
 
-    await fetch("http://localhost:3000/apiLNFG/sumarPrecioExamenes", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody), // Enviando el objeto JSON
-    })
+    await fetch(
+      "https://apilnfg-production.up.railway.app/apiLNFG/sumarPrecioExamenes",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody), // Enviando el objeto JSON
+      }
+    )
       .then((res) => res.json())
       .then((respuesta) => {
         console.log(respuesta.respuesta[0]);
@@ -224,7 +230,7 @@ function GenerarOrden() {
 
   const datosPaciente = async () => {
     await fetch(
-      `http://localhost:3000/apiLNFG/obtenerPacienteDocumento/${documento}`
+      `https://apilnfg-production.up.railway.app/apiLNFG/obtenerPacienteDocumento/${documento}`
     )
       .then((res) => res.json())
       .then((respuesta) => {
@@ -244,7 +250,9 @@ function GenerarOrden() {
   };
 
   const datosTecnico = async () => {
-    await fetch("http://localhost:3000/apiLNFG/obtenerTecnico")
+    await fetch(
+      "https://apilnfg-production.up.railway.app/apiLNFG/obtenerTecnico"
+    )
       .then((res) => res.json())
       .then((respuesta) => {
         tecnicos = respuesta.respuesta.map((tecnico) => ({
@@ -257,7 +265,9 @@ function GenerarOrden() {
   };
 
   const datosExamenes = async () => {
-    await fetch("http://localhost:3000/apiLNFG/obtenerListaexamenes")
+    await fetch(
+      "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaexamenes"
+    )
       .then((res) => res.json())
       .then((respuesta) => {
         examenes = respuesta.respuesta.map((examen) => ({
@@ -272,7 +282,9 @@ function GenerarOrden() {
   };
 
   const datosPaquete = async () => {
-    await fetch("http://localhost:3000/apiLNFG/obtenerListaPaquete")
+    await fetch(
+      "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaPaquete"
+    )
       .then((res) => res.json())
       .then((respuesta) => {
         paquete = respuesta.respuesta.map((paquete) => ({
@@ -345,7 +357,7 @@ function GenerarOrden() {
   };
 
   const actualizarDireccion = async (documento, direccion, descripcion) => {
-    const url = `http://localhost:3000/apiLNFG/actualizarDireccion/${documento}`;
+    const url = `https://apilnfg-production.up.railway.app/apiLNFG/actualizarDireccion/${documento}`;
     const data = {
       direccion: direccion,
       descripcion: descripcion,
@@ -407,31 +419,34 @@ function GenerarOrden() {
       
       `);
     } else {
-      await fetch("http://localhost:3000/apiLNFG/crearOrden", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json", // Tipo de contenido del cuerpo de la solicitud
-        },
-        body: JSON.stringify({
-          id_tecnico: datosSecundario.tecnico,
-          id_paciente: datos.numerDocumento,
-          id_admisionista: "1765689809",
-          id_sede: 1000,
-          examenes: datosrden.examenes || "NO",
-          paquetes: datosrden.paquetes || "NO",
-          req_paquetes: datosrden.descripcionPaquete || "NO",
-          req_examenes: datosrden.requisitosExamenes || "NO",
-          fecha_examen: datos.fechaExamen,
-          tipo_servicio: datosSecundario.tipoServicio,
-          tipo_paciente: datosSecundario.tipoPaciente,
-          estado: "ACTIVA",
-          valor_copago: datosSecundario.copago,
-          valor_domicilio: datosSecundario.valorDomicilio,
-          valor_examenes: datosrden.valorExamenes,
-          valor_paquetes: datosrden.valorPaquete,
-          valor_factura: datosrden.valorFactura,
-        }),
-      })
+      await fetch(
+        "https://apilnfg-production.up.railway.app/apiLNFG/crearOrden",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", // Tipo de contenido del cuerpo de la solicitud
+          },
+          body: JSON.stringify({
+            id_tecnico: datosSecundario.tecnico,
+            id_paciente: datos.numerDocumento,
+            id_admisionista: "1765689809",
+            id_sede: 1000,
+            examenes: datosrden.examenes || "NO",
+            paquetes: datosrden.paquetes || "NO",
+            req_paquetes: datosrden.descripcionPaquete || "NO",
+            req_examenes: datosrden.requisitosExamenes || "NO",
+            fecha_examen: datos.fechaExamen,
+            tipo_servicio: datosSecundario.tipoServicio,
+            tipo_paciente: datosSecundario.tipoPaciente,
+            estado: "ACTIVA",
+            valor_copago: datosSecundario.copago,
+            valor_domicilio: datosSecundario.valorDomicilio,
+            valor_examenes: datosrden.valorExamenes,
+            valor_paquetes: datosrden.valorPaquete,
+            valor_factura: datosrden.valorFactura,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then((respuesta) => {
           console.log(respuesta);

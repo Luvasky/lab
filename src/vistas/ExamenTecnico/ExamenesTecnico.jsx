@@ -64,7 +64,7 @@ export default function ExamenesTencnico() {
     setCargando(true);
     try {
       const resul = await fetch(
-        `http://localhost:3000/apiLNFG/obtenerListaOrdenTecnico/${documento}`,
+        `https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaOrdenTecnico/${documento}`,
         {
           method: "GET",
         }

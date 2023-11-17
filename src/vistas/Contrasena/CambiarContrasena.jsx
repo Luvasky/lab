@@ -48,7 +48,10 @@ function CambiarContrasena() {
         }),
       };
 
-      fetch(`http://localhost:3000/apiLNFG/cambiarPass/${documento}`, options)
+      fetch(
+        `https://apilnfg-production.up.railway.app/apiLNFG/cambiarPass/${documento}`,
+        options
+      )
         .then((response) => {
           if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);

@@ -47,7 +47,7 @@ export default function StickyHeadTable() {
     setCargando(true);
     try {
       const resul = await fetch(
-        "http://localhost:3000/apiLNFG/obtenerListaexamenes",
+        "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaexamenes",
         {
           method: "GET",
         }

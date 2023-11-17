@@ -30,17 +30,20 @@ function EditarExamen() {
     setBlock(true);
     setCargando(true); // Establecer cargando en true antes de la solicitud fetch
     try {
-      await fetch(`http://localhost:3000/apiLNFG/actualizarExamen/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          nombre: datosTextField.nombre.toUpperCase().trim(),
-          precio: datosTextField.precio.toUpperCase().trim(),
-          requisitos: datosTextField.requisitos.toUpperCase().trim(),
-        }),
-      });
+      await fetch(
+        `https://apilnfg-production.up.railway.app/apiLNFG/actualizarExamen/${id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nombre: datosTextField.nombre.toUpperCase().trim(),
+            precio: datosTextField.precio.toUpperCase().trim(),
+            requisitos: datosTextField.requisitos.toUpperCase().trim(),
+          }),
+        }
+      );
 
       // La solicitud fetch se completó con éxito, puedes realizar acciones adicionales si es necesario.
     } catch (error) {
@@ -56,7 +59,9 @@ function EditarExamen() {
 
   const datosBd = async () => {
     try {
-      await fetch(`http://localhost:3000/apiLNFG/obtenerExameneId/${id}`)
+      await fetch(
+        `https://apilnfg-production.up.railway.app/apiLNFG/obtenerExameneId/${id}`
+      )
         .then((res) => res.json())
         .then((respuesta) => {
           console.log(respuesta);

@@ -120,7 +120,9 @@ function SeleccionaExamen() {
   };
 
   const InitialRequire = async () => {
-    await fetch("http://localhost:3000/apiLNFG/obetenerListaExamenesSinNo")
+    await fetch(
+      "https://apilnfg-production.up.railway.app/apiLNFG/obetenerListaExamenesSinNo"
+    )
       .then((res) => res.json())
       .then((respuesta) => {
         setExamen(respuesta.respuesta);
@@ -135,16 +137,19 @@ function SeleccionaExamen() {
     // Join the items into a single comma-separated string
     const joinedCartItems = cartItemsString.join(",");
 
-    await fetch("http://localhost:3000/apiLNFG/crearSolicitudWompi", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        idwompi_solicitud: paymentReference,
-        documento: documento,
-        examenes: joinedCartItems,
-        paquetes: "NO",
-      }),
-    }).then((res) => {
+    await fetch(
+      "https://apilnfg-production.up.railway.app/apiLNFG/crearSolicitudWompi",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          idwompi_solicitud: paymentReference,
+          documento: documento,
+          examenes: joinedCartItems,
+          paquetes: "NO",
+        }),
+      }
+    ).then((res) => {
       res.json().then((respuesta) => console.log(respuesta));
     });
   };
@@ -152,7 +157,7 @@ function SeleccionaExamen() {
   const requestDelete = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/apiLNFG/borrarSolicitud/${paymentReference}`,
+        `https://apilnfg-production.up.railway.app/apiLNFG/borrarSolicitud/${paymentReference}`,
         {
           method: "DELETE",
         }

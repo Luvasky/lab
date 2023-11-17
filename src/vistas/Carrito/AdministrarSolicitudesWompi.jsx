@@ -48,7 +48,7 @@ export default function AdministrarSolicitudesWompi() {
     setCargando(true);
     try {
       const resul = await fetch(
-        "http://localhost:3000/apiLNFG/obtenerListaSolicitudWompi",
+        "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaSolicitudWompi",
         {
           method: "GET",
         }

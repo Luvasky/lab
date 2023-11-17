@@ -64,7 +64,7 @@ function Login() {
       setEstadoDocumento(false);
       setEstadoContrasena(false);
       await fetch(
-        `http://localhost:3000/apiLNFG/obtenerUsuarioDocumento/${credenciales.documento}`
+        `https://apilnfg-production.up.railway.app/apiLNFG/obtenerUsuarioDocumento/${credenciales.documento}`
       )
         .then((respuesta) => respuesta.json())
         .then((res) => {

@@ -52,7 +52,7 @@ export default function AdministrarSolicitud() {
     setCargando(true);
     try {
       const resul = await fetch(
-        "http://localhost:3000/apiLNFG/obtenerListaSolicitud",
+        "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaSolicitud",
         {
           method: "GET",
         }

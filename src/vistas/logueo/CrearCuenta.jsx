@@ -131,30 +131,33 @@ function CrearCuenta() {
           return; // Stop further processing if the password is not secure
         }
 
-        await fetch("http://localhost:3000/apiLNFG/crearPaciente", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json", // Tipo de contenido del cuerpo de la solicitud
-          },
-          body: JSON.stringify({
-            tipo_documento: capturar.tipoDocumento.toUpperCase().trim(),
-            documento: capturar.numeroDocumento.trim(),
-            nombre: capturar.nombre.toUpperCase().trim(),
-            segundo_nombre: capturar.segundoNombre.toUpperCase().trim(),
-            primer_apellido: capturar.primerApellido.toUpperCase().trim(),
-            segundo_apellido: capturar.segundoApellido.toUpperCase().trim(),
-            edad: capturar.edad.trim(),
-            tipo: capturar.tipoPaciente.toUpperCase().trim(),
-            email: capturar.email.trim(),
-            fecha_nacimiento: capturar.fechaNacimiento.trim(),
-            celular: capturar.celular.trim(),
-            contrasena: capturar.contrasena.trim(),
-            tipo: capturar.tipoPaciente.toUpperCase().trim(),
-            direccion: capturar.direccion.toUpperCase().trim(),
-            desc_direccion: capturar.descripcion.toUpperCase().trim(),
-            sexo: capturar.sexo.toUpperCase().trim(),
-          }),
-        }).then((respuesta) => {
+        await fetch(
+          "https://apilnfg-production.up.railway.app/apiLNFG/crearPaciente",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json", // Tipo de contenido del cuerpo de la solicitud
+            },
+            body: JSON.stringify({
+              tipo_documento: capturar.tipoDocumento.toUpperCase().trim(),
+              documento: capturar.numeroDocumento.trim(),
+              nombre: capturar.nombre.toUpperCase().trim(),
+              segundo_nombre: capturar.segundoNombre.toUpperCase().trim(),
+              primer_apellido: capturar.primerApellido.toUpperCase().trim(),
+              segundo_apellido: capturar.segundoApellido.toUpperCase().trim(),
+              edad: capturar.edad.trim(),
+              tipo: capturar.tipoPaciente.toUpperCase().trim(),
+              email: capturar.email.trim(),
+              fecha_nacimiento: capturar.fechaNacimiento.trim(),
+              celular: capturar.celular.trim(),
+              contrasena: capturar.contrasena.trim(),
+              tipo: capturar.tipoPaciente.toUpperCase().trim(),
+              direccion: capturar.direccion.toUpperCase().trim(),
+              desc_direccion: capturar.descripcion.toUpperCase().trim(),
+              sexo: capturar.sexo.toUpperCase().trim(),
+            }),
+          }
+        ).then((respuesta) => {
           respuesta.json();
 
           if (respuesta.status == 200) {

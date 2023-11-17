@@ -70,20 +70,23 @@ function CrearPaquete() {
       setCamposVacios(true);
     } else {
       setEnviando(true);
-      await fetch("http://localhost:3000/apiLNFG/crearPaquete", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      await fetch(
+        "https://apilnfg-production.up.railway.app/apiLNFG/crearPaquete",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
 
-        body: JSON.stringify({
-          id_paquete: datos.id,
-          nombre: datos.nombre,
-          precio: datos.precio,
-          descripcion: datos.descripcion,
-          examenes: datos.examenes,
-        }),
-      })
+          body: JSON.stringify({
+            id_paquete: datos.id,
+            nombre: datos.nombre,
+            precio: datos.precio,
+            descripcion: datos.descripcion,
+            examenes: datos.examenes,
+          }),
+        }
+      )
         .then((res) => res.json())
         .then((respuesta) => {
           console.log(respuesta);
@@ -105,7 +108,7 @@ function CrearPaquete() {
     setCargando(true);
     try {
       const response = await fetch(
-        "http://localhost:3000/apiLNFG/obtenerListaExamenes"
+        "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaExamenes"
       );
       const data = await response.json();
 

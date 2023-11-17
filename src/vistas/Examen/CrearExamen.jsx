@@ -46,20 +46,21 @@ function CrearExamen() {
       setCamposVacios(true);
     } else {
       try {
-        await fetch("http://localhost:3000/apiLNFG/crearExamen", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            id_examen: datosExamen.idExamen.toUpperCase().trim(),
-            nombre: datosExamen.nombre.toUpperCase().trim(),
-            precio: datosExamen.precio.toUpperCase().trim(),
-            requisitos: datosExamen.requisitos.toUpperCase().trim(),
-          }),
-        }).then((res) =>
-          res.json().then((respuesta) => console.log(respuesta))
-        );
+        await fetch(
+          "https://apilnfg-production.up.railway.app/apiLNFG/crearExamen",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              id_examen: datosExamen.idExamen.toUpperCase().trim(),
+              nombre: datosExamen.nombre.toUpperCase().trim(),
+              precio: datosExamen.precio.toUpperCase().trim(),
+              requisitos: datosExamen.requisitos.toUpperCase().trim(),
+            }),
+          }
+        ).then((res) => res.json().then((respuesta) => console.log(respuesta)));
         setCargando(false);
         setExitoso(true);
       } catch (error) {

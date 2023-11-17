@@ -105,7 +105,8 @@ export default function AdministrarPaciente() {
   const peticion = async () => {
     // setCargando(true);
 
-    const url = "http://localhost:3000/apiLNFG/obtenerListaPaciente";
+    const url =
+      "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaPaciente";
 
     await fetch(url)
       .then((response) => {

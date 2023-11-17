@@ -107,7 +107,9 @@ function SeleccionaPaquete() {
     setDataProduct(data);
   };
   const InitialRequire = async () => {
-    await fetch("http://localhost:3000/apiLNFG/obtenerListaPaqueteSinNo")
+    await fetch(
+      "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaPaqueteSinNo"
+    )
       .then((res) => res.json())
       .then((respuesta) => {
         setExamen(respuesta.respuesta);
@@ -122,23 +124,26 @@ function SeleccionaPaquete() {
     // Join the items into a single comma-separated string
     const joinedCartItems = cartItemsString.join(",");
 
-    await fetch("http://localhost:3000/apiLNFG/crearSolicitudWompi", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        idwompi_solicitud: paymentReference,
-        documento: documento,
-        fecha_ingreso: "sjsjs",
-        examenes: joinedCartItems,
-        paquetes: "NO",
-      }),
-    });
+    await fetch(
+      "https://apilnfg-production.up.railway.app/apiLNFG/crearSolicitudWompi",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          idwompi_solicitud: paymentReference,
+          documento: documento,
+          fecha_ingreso: "sjsjs",
+          examenes: joinedCartItems,
+          paquetes: "NO",
+        }),
+      }
+    );
   };
 
   const requestDelete = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/apiLNFG/borrarSolicitud/${paymentReference}`,
+        `https://apilnfg-production.up.railway.app/apiLNFG/borrarSolicitud/${paymentReference}`,
         {
           method: "DELETE",
         }

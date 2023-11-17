@@ -57,7 +57,7 @@ function ObservarSolicitudWompi() {
   const datosBd = async () => {
     try {
       await fetch(
-        `http://localhost:3000/apiLNFG/listarSlicitudWompiRef/${RefPago}`
+        `https://apilnfg-production.up.railway.app/apiLNFG/listarSlicitudWompiRef/${RefPago}`
       )
         .then((res) => res.json())
         .then((respuesta) => {

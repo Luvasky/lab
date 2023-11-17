@@ -85,7 +85,7 @@ function EditarPaciente() {
   const datosBd = async () => {
     try {
       await fetch(
-        `http://localhost:3000/apiLNFG/obtenerPacienteDocumento/${documento}`
+        `https://apilnfg-production.up.railway.app/apiLNFG/obtenerPacienteDocumento/${documento}`
       )
         .then((res) => res.json())
         .then((respuesta) => {
@@ -178,7 +178,7 @@ function EditarPaciente() {
         }
 
         await fetch(
-          `http://localhost:3000/apiLNFG/actualizarPaciente/${capturar.numeroDocumento}`,
+          `https://apilnfg-production.up.railway.app/actualizarPaciente/${capturar.numeroDocumento}`,
           {
             method: "PUT",
             headers: {

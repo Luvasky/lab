@@ -64,7 +64,7 @@ function GenerarOrden() {
 
   const datosPaciente = async () => {
     await fetch(
-      `http://localhost:3000/apiLNFG/obtenerPacienteDocumento/${id_paciente}`
+      `https://apilnfg-production.up.railway.app/apiLNFG/obtenerPacienteDocumento/${id_paciente}`
     )
       .then((res) => res.json())
       .then((respuesta) => {
