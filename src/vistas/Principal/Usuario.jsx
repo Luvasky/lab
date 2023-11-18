@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import {
@@ -17,11 +17,47 @@ import "../estlo.css";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function Usuario() {
+  const [autenticado, setAutenticado] = useState(false); // Estado de autenticación
   const navigate = useNavigate();
   const location = useLocation();
 
   const documento = new URLSearchParams(location.search).get("documento");
   console.log(documento);
+
+  const cerrarSesion = () => {
+    const resultado = window.confirm(
+      "¿Estás seguro que quieres cerrar la sesión?"
+    );
+
+    if (resultado) {
+      // El usuario hizo clic en "Aceptar", ejecuta tu código aquí
+      navigate("/");
+    } else {
+      // El usuario hizo clic en "Cancelar" o cerró la ventana de confirmación
+    }
+  };
+
+  useEffect(() => {
+    // Deshabilitar el botón de retroceso
+    const disableBackButton = (event) => {
+      event.preventDefault();
+      window.history.forward(); // Navegar hacia adelante
+    };
+
+    window.history.pushState(null, "", window.location.pathname);
+    window.addEventListener("popstate", disableBackButton);
+
+    // Aquí podrías realizar alguna lógica de autenticación, por ejemplo, verificar si el usuario está autenticado
+    // Simulemos que la autenticación es exitosa después de 2 segundos
+    const timeoutId = setTimeout(() => {
+      setAutenticado(true);
+    }, 2000);
+
+    return () => {
+      window.removeEventListener("popstate", disableBackButton);
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -53,7 +89,7 @@ function Usuario() {
             </Button>
             <Button
               sx={{ color: "rgb( 255, 89, 0 )" }}
-              onClick={() => navigate("/")}
+              onClick={() => cerrarSesion()}
             >
               Cerrar Sesión
             </Button>

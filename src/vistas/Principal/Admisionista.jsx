@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -82,6 +82,34 @@ function Admisionista() {
     },
   ];
 
+  const cerrarSesion = () => {
+    const resultado = window.confirm(
+      "¿Estás seguro que quieres cerrar la sesión?"
+    );
+
+    if (resultado) {
+      // El usuario hizo clic en "Aceptar", ejecuta tu código aquí
+      navigate("/");
+    } else {
+      // El usuario hizo clic en "Cancelar" o cerró la ventana de confirmación
+    }
+  };
+
+  useEffect(() => {
+    // Deshabilitar el botón de retroceso
+    const disableBackButton = (event) => {
+      event.preventDefault();
+      window.history.forward(); // Navegar hacia adelante
+    };
+
+    window.history.pushState(null, "", window.location.pathname);
+    window.addEventListener("popstate", disableBackButton);
+
+    return () => {
+      window.removeEventListener("popstate", disableBackButton);
+    };
+  }, []);
+
   return (
     <Box>
       <Box
@@ -107,7 +135,7 @@ function Admisionista() {
             height: { sm: 40, md: 40, lg: 40 },
             width: { xs: "100%", sm: 200 },
           }}
-          onClick={() => navigate("/")}
+          onClick={() => cerrarSesion()}
           endIcon={<LogoutIcon></LogoutIcon>}
         >
           Cerrar Sesion

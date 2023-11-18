@@ -7,7 +7,7 @@ import {
   Snackbar,
 } from "@mui/material";
 import logo from "./LOGO2.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MuiAlert from "@mui/material/Alert";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -102,6 +102,21 @@ function Login() {
         });
     }
   };
+
+  useEffect(() => {
+    // Deshabilitar el botón de retroceso
+    const disableBackButton = (event) => {
+      event.preventDefault();
+      window.history.forward(); // Navegar hacia adelante
+    };
+
+    window.history.pushState(null, "", window.location.pathname);
+    window.addEventListener("popstate", disableBackButton);
+
+    return () => {
+      window.removeEventListener("popstate", disableBackButton);
+    };
+  }, []);
 
   return (
     <Box
