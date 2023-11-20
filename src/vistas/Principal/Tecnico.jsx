@@ -43,6 +43,11 @@ function Tecnico() {
       imagen: noConforme,
       link: "/vistaIngresarCampo",
     },
+    {
+      accion: "Cambiar Contraseña",
+      imagen: noConforme,
+      link: `/vistaCambiarContrasena?documento=${documento}`,
+    },
   ];
 
   const navigate = useNavigate();

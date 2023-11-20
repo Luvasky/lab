@@ -21,6 +21,8 @@ import PaidIcon from "@mui/icons-material/Paid";
 function SeleccionaPaquete() {
   const precio = 10000;
   const [examen, setExamen] = useState([]);
+  const [deacuerdo, setDeacuerdo] = useState(false);
+
   const [cargando, setCargando] = useState(false);
   const [contador, setContador] = useState(0);
   const [estado, setEstado] = useState(true);
@@ -93,7 +95,7 @@ function SeleccionaPaquete() {
     }
     // Wait for payment reference generation
     console.log(paymentReference);
-    requestTableWompy();
+    // requestTableWompy();
   };
   const handleCloseCart = () => setOpenCart(false);
   const [openCart, setOpenCart] = useState(false);
@@ -221,11 +223,25 @@ function SeleccionaPaquete() {
                   maxHeight: 500,
                   width: "100%",
                   backgroundColor: "red",
+                  overflow: "hidden", // Oculta el contenido que sobresale
                 }}
               >
                 <CardMedia component="img" height="150" image={blood} />
-                <CardContent sx={{ backgroundColor: "gold", height: 300 }}>
-                  <Box>
+                <CardContent
+                  sx={{
+                    backgroundColor: "gold",
+                    height: 300,
+                    overflowY: "auto", // Habilita el scroll vertical si el contenido es más largo que la altura especificada
+                  }}
+                >
+                  <Box
+                    sx={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      maxWidth: "100%",
+                    }}
+                  >
                     <Typography variant="h7">{examen.nombre}</Typography>
                   </Box>
                   <Box>
@@ -355,7 +371,19 @@ function SeleccionaPaquete() {
             </Box>
             <Box sx={{ marginBottom: "2%" }}>TOTAL A PAGAR</Box>
             <Box sx={{ marginBottom: "2%" }}>$ {totalPrice}</Box>
-            <Box>
+            <Button
+              disabled={deacuerdo}
+              fullWidth
+              variant="contained"
+              sx={{ display: deacuerdo ? "none" : "blokc" }}
+              onClick={() => {
+                setDeacuerdo(true);
+                requestTableWompy();
+              }}
+            >
+              ESTOY DE ACUERDO CON MI COMPRA !
+            </Button>
+            <Box sx={{ display: deacuerdo ? "block" : "none" }}>
               <form action="https://checkout.wompi.co/p/" method="GET">
                 <input
                   type="hidden"
@@ -388,20 +416,21 @@ function SeleccionaPaquete() {
                   Pagar con Wompi
                 </Button>
               </form>
-              <Box>
-                <Button
-                  fullWidth
-                  color="error"
-                  variant="contained"
-                  sx={{ marginTop: "2%" }}
-                  onClick={() => {
-                    handleCloseCart();
-                    requestDelete();
-                  }}
-                >
-                  CANCELAR
-                </Button>
-              </Box>
+            </Box>
+            <Box>
+              <Button
+                fullWidth
+                color="error"
+                variant="contained"
+                sx={{ marginTop: "2%" }}
+                onClick={() => {
+                  handleCloseCart();
+                  requestDelete();
+                  setDeacuerdo(false);
+                }}
+              >
+                CANCELAR
+              </Button>
             </Box>
           </Box>
         </Box>

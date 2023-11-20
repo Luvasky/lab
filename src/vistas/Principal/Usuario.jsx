@@ -84,14 +84,14 @@ function Usuario() {
               marginLeft: { xs: "1" },
             }}
           >
-            {/* <Button
+            <Button
               sx={{ color: "rgb( 255, 89, 0 )" }}
               onClick={() =>
-                navigate(`/vistaTengoExamen?documento=${documento}`)
+                navigate(`/vistaCambiarContrasena?documento=${documento}`)
               }
             >
-              Ya tengo una orden médica!
-            </Button> */}
+              Cambiar Contraseña
+            </Button>
             <Button
               sx={{ color: "rgb( 255, 89, 0 )" }}
               onClick={() => cerrarSesion()}
