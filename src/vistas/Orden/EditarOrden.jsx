@@ -344,6 +344,24 @@ function EditarOrden() {
                 ></TextField>
               </Grid>
 
+              <Grid lg={6} md={6} sm={12} xs={12} padding={2}>
+                <TextField
+                  disabled={estado === "CANCELADO" ? true : false}
+                  fullWidth
+                  value={datos.direccion}
+                  label="Direccion"
+                ></TextField>
+              </Grid>
+
+              <Grid lg={6} md={6} sm={12} xs={12} padding={2}>
+                <TextField
+                  disabled={estado === "CANCELADO" ? true : false}
+                  fullWidth
+                  value={datos.descripcion}
+                  label="Descripcion direccion"
+                ></TextField>
+              </Grid>
+
               <Grid xs={12} padding={2}>
                 <TextField
                   disabled={estado === "CANCELADO" ? true : false}

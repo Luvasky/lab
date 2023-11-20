@@ -23,6 +23,7 @@ function GenerarOrden() {
 
   const documento = new URLSearchParams(location.search).get("documento");
 
+  const [bloqCopago, setBloqCopago] = useState(false);
   const [exito, setExito] = useState(false);
   const [paquetesSeleccionados, setPaquetesSeleccionados] = useState([]);
   const [listaTecnicos, setListaTecnicos] = useState([]);
@@ -216,11 +217,11 @@ function GenerarOrden() {
   const tipopacientes = [
     {
       value: "INDEPENDIENTE",
-      label: "Independiente",
+      label: "INDEPENDIENTE",
     },
     {
       value: "PREPAGADA",
-      label: "Prepagada",
+      label: "PREPAGADA",
     },
     {
       value: "EPS",
@@ -385,6 +386,17 @@ function GenerarOrden() {
 
   const crearOrden = async () => {
     setBlock(true);
+
+    if (
+      datosSecundario.valorDomicilio === "" ||
+      /[^\d.]/.test(datosSecundario.valorDomicilio)
+    ) {
+      alert(
+        "EL VALOR DEL DOMICILIO DEBE SER UN NÚMERO ENTERO Y NO DEBE CONTENER CARACTERES ESPECIALES"
+      );
+      setBlock(false);
+      return;
+    }
 
     if (
       datosrden.examenes === "" ||
@@ -663,6 +675,9 @@ function GenerarOrden() {
               </Grid>
               <Grid xs={12} sm={6} md={6} lg={6} padding={2}>
                 <TextField
+                  disabled={
+                    datosSecundario.tipoPaciente !== "PREPAGADA" ? true : false
+                  }
                   onChange={capturarDatosSecundarios}
                   name="copago"
                   label="Copago"
