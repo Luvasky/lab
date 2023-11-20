@@ -95,7 +95,7 @@ function Olvido() {
         <Grid container xs={12} md={8} lg={6}>
           {/* Contenedor de TextFileds */}
 
-          <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
+          <Grid item xs={12} sm={12} md={12} lg={12} padding={2}>
             <TextField
               fullWidth
               error={camposVacios}
@@ -105,7 +105,7 @@ function Olvido() {
             ></TextField>
           </Grid>
 
-          <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
+          <Grid item xs={12} sm={12} md={12} lg={12} padding={2}>
             <TextField
               type="email"
               fullWidth
@@ -118,7 +118,7 @@ function Olvido() {
 
           {/* Contenedpr de botones */}
 
-          <Grid xs={12} padding={1}>
+          <Grid item xs={12} padding={1}>
             <Button
               // onClick={() => console.log(datosExamen)}
               fullWidth
@@ -135,7 +135,7 @@ function Olvido() {
             </Button>
           </Grid>
 
-          <Grid xs={12} padding={1}>
+          <Grid item xs={12} padding={1}>
             <Button
               disabled={cargando}
               variant="contained"

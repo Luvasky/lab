@@ -31,13 +31,14 @@ function SeleccionaExamen() {
     paquetes: "",
   });
   const [countClcik, setCountClcik] = useState(0);
-  const [deacuerdo, setDeacuerdo] = useState(true);
+  const [deacuerdo, setDeacuerdo] = useState(false);
   const [examen, setExamen] = useState([]);
   const [cargando, setCargando] = useState(false);
   const [contador, setContador] = useState(0);
   const [estado, setEstado] = useState(true);
   const [cartItems, setCartItems] = useState([]); // State to hold the added items
   const [totalPrice, setTotalPrice] = useState(0); // State to hold the total price
+  const [cargandoDeacuerdo, setcargandoDeacuerdo] = useState(false); // State to hold the
 
   const documento = new URLSearchParams(location.search).get("documento");
   console.log(documento);
@@ -71,7 +72,7 @@ function SeleccionaExamen() {
     }
     // Wait for payment reference generation
     console.log(paymentReference);
-    requestTableWompy();
+    // requestTableWompy();
   };
   const handleCloseCart = () => {
     setOpenCart(false);
@@ -132,6 +133,8 @@ function SeleccionaExamen() {
   };
 
   const requestTableWompy = async (e) => {
+    setcargandoDeacuerdo(true);
+
     const cartItemsString = cartItems.map((item) => item.nombre);
 
     // Join the items into a single comma-separated string
@@ -150,8 +153,12 @@ function SeleccionaExamen() {
         }),
       }
     ).then((res) => {
-      res.json().then((respuesta) => console.log(respuesta));
+      res.json().then((respuesta) => {
+        console.log(respuesta);
+        setcargandoDeacuerdo(false);
+      });
     });
+    setcargandoDeacuerdo(false);
   };
 
   const requestDelete = async () => {
@@ -175,10 +182,33 @@ function SeleccionaExamen() {
       console.error("Error during fetch operation:", error.message);
     }
   };
-
   useEffect(() => {
     InitialRequire();
     generatePaymentReference();
+
+    // // Deshabilitar el botón de retroceso
+    // const disableBackButton = (event) => {
+    //   event.preventDefault();
+    //   window.history.forward(); // Navegar hacia adelante
+    // };
+
+    // // Deshabilitar el botón de recarga
+    // const disableReloadButton = (event) => {
+    //   event.preventDefault();
+    // };
+
+    // window.history.pushState(null, "", window.location.pathname);
+
+    // // Deshabilitar el botón de ir hacia adelante del navegador por defecto
+    // window.addEventListener("popstate", disableBackButton);
+
+    // // Deshabilitar el botón de recargar la página
+    // window.addEventListener("beforeunload", disableReloadButton);
+
+    // return () => {
+    //   window.removeEventListener("popstate", disableBackButton);
+    //   window.removeEventListener("beforeunload", disableReloadButton);
+    // };
   }, []);
 
   return !cargando ? (
@@ -228,7 +258,6 @@ function SeleccionaExamen() {
               key={examen.id_examen}
             >
               <Card
-                // onClick={() => navigate(opciones.link)}
                 key={examen.id_examen}
                 sx={{
                   marginLeft: "auto",
@@ -236,13 +265,28 @@ function SeleccionaExamen() {
                   maxHeight: 500,
                   width: "100%",
                   backgroundColor: "red",
+                  overflow: "hidden", // Oculta el contenido que sobresale
                 }}
               >
                 <CardMedia component="img" height="150" image={blood} />
-                <CardContent sx={{ backgroundColor: "gold", height: 300 }}>
-                  <Box>
+                <CardContent
+                  sx={{
+                    backgroundColor: "gold",
+                    height: 300,
+                    overflowY: "auto", // Habilita el scroll vertical si el contenido es más largo que la altura especificada
+                  }}
+                >
+                  <Box
+                    sx={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                      maxWidth: "100%",
+                    }}
+                  >
                     <Typography variant="h7">{examen.nombre}</Typography>
                   </Box>
+
                   <Box>
                     <Typography variant="h7">${examen.precio}</Typography>
                   </Box>
@@ -342,6 +386,7 @@ function SeleccionaExamen() {
                   <Box>{product.nombre}</Box>
                   <Box>${product.precio}</Box>
                   <Button
+                    disabled={deacuerdo}
                     variant="contained"
                     color="error"
                     size="small"
@@ -357,16 +402,28 @@ function SeleccionaExamen() {
             </Box>
             <Box sx={{ marginBottom: "2%" }}>TOTAL A PAGAR</Box>
             <Box sx={{ marginBottom: "2%" }}>$ {totalPrice} </Box>
-            <Box>
+            <Button
+              disabled={deacuerdo}
+              fullWidth
+              variant="contained"
+              sx={{ display: deacuerdo ? "none" : "blokc" }}
+              onClick={() => {
+                setDeacuerdo(true);
+                requestTableWompy();
+              }}
+            >
+              ESTOY DE ACUERDO CON MI COMPRA !
+            </Button>
+            <Box sx={{ display: deacuerdo ? "block" : "none" }}>
               <form
                 action="https://checkout.wompi.co/p/"
                 method="GET"
-                onSubmit={() => requestTableWompy()}
+                onSubmit={requestTableWompy}
               >
                 <input
                   type="hidden"
                   name="public-key"
-                  value="pub_test_jGZdlZTIT9P3LU2IKMYQfuT3JDyqpm0A"
+                  value="pub_prod_IQ3EspNkdMIX50SFcqkTGKQSY7dxAu6H"
                 />
                 <input type="hidden" name="currency" value="COP" />
                 <input
@@ -382,13 +439,13 @@ function SeleccionaExamen() {
                 <input
                   type="hidden"
                   name="data-signature:integrity"
-                  value="test_integrity_1SCRqtCbDBQmfJH0tmGOJtoZsDx8e98T"
+                  value="prod_integrity_Pv5nJFBaTpAIJnthkWZPIMkjqTSeFwlL"
                 />
 
                 <input
                   type="hidden"
                   name="redirect-url"
-                  value="http://localhost:5173/vistaSeleccionaExamen?documento=49732512"
+                  value={`http://localhost:5173/`}
                 />
 
                 <Button
@@ -401,20 +458,21 @@ function SeleccionaExamen() {
                   Pagar con Wompi
                 </Button>
               </form>
-              <Box>
-                <Button
-                  fullWidth
-                  color="error"
-                  variant="contained"
-                  sx={{ marginTop: "2%" }}
-                  onClick={() => {
-                    handleCloseCart();
-                    requestDelete();
-                  }}
-                >
-                  CANCELAR
-                </Button>
-              </Box>
+            </Box>
+            <Box>
+              <Button
+                fullWidth
+                color="error"
+                variant="contained"
+                sx={{ marginTop: "2%" }}
+                onClick={() => {
+                  handleCloseCart();
+                  requestDelete();
+                  setDeacuerdo(false);
+                }}
+              >
+                CANCELAR
+              </Button>
             </Box>
           </Box>
         </Box>

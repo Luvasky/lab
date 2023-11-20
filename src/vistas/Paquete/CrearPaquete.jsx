@@ -60,6 +60,13 @@ function CrearPaquete() {
   const navigate = useNavigate();
 
   const peticion = async () => {
+    if (datos.precio === "" || /[^\d.]/.test(datos.precio)) {
+      alert(
+        "EL PRECIO DEBE SER UN NÚMERO ENTERO Y NO DEBE CONTENER CARACTERES ESPECIALES COMO COMAS"
+      );
+      setCargando(false);
+      return;
+    }
     if (
       datos.examenes === " " ||
       datos.id === "" ||
@@ -68,9 +75,16 @@ function CrearPaquete() {
       datos.precio === ""
     ) {
       setCamposVacios(true);
+    } else if (
+      isNaN(Number(datos.precio)) ||
+      !Number.isInteger(Number(datos.precio))
+    ) {
+      alert(
+        "EL CAMPO PRECIO DEBE SER UN NÚMERO ENTERO SIN PUNTOS Y SIN LETRAS"
+      );
     } else {
       setEnviando(true);
-      await fetch(
+      const response = await fetch(
         "https://apilnfg-production.up.railway.app/apiLNFG/crearPaquete",
         {
           method: "POST",
@@ -86,20 +100,23 @@ function CrearPaquete() {
             examenes: datos.examenes,
           }),
         }
-      )
-        .then((res) => res.json())
-        .then((respuesta) => {
-          console.log(respuesta);
-          setDatos({
-            id: "",
-            nombre: "",
-            precio: "",
-            examenes: "",
-            descripcion: "",
-          }); // Reiniciar los campos después de enviar con éxito
-          setExitoso(true);
-        })
-        .catch((error) => console.log(error));
+      );
+
+      if (response.status === 200) {
+        // console.log(respuesta);
+        setDatos({
+          id: "",
+          nombre: "",
+          precio: "",
+          examenes: "",
+          descripcion: "",
+        }); // Reiniciar los campos después de enviar con éxito
+        setExitoso(true);
+      } else if (response.status === 500) {
+        alert("EL PAQUETE YA EXISTE");
+      }
+
+      // .catch((error) => console.log(error));
       setEnviando(false);
     }
   };
@@ -167,6 +184,7 @@ function CrearPaquete() {
 
               <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
                 <Autocomplete
+                  error={camposVacios}
                   name="examenes"
                   onChange={capturarExamenesSeleccionados} // Aquí se llama a la función
                   multiple
@@ -177,6 +195,7 @@ function CrearPaquete() {
                   filterSelectedOptions
                   renderInput={(params) => (
                     <TextField
+                      error={camposVacios}
                       multiline
                       rows={8}
                       {...params}

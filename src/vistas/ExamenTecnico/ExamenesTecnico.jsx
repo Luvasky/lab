@@ -165,7 +165,10 @@ export default function ExamenesTencnico() {
           marginBottom: "1%",
         }}
       >
-        <Button variant="contained" onClick={() => navigate(-1)}>
+        <Button
+          variant="contained"
+          onClick={() => navigate(`/vistaTecnico?documento=${documento}`)}
+        >
           Volver
         </Button>
       </Box>

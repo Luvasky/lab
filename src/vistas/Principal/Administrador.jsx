@@ -113,11 +113,11 @@ const opcionesAdmin = [
 function Administrador() {
   const location = useLocation();
   const nombre = new URLSearchParams(location.search).get("nombre");
-  console.log(nombre);
+  // console.log(nombre);
 
   const navigate = useNavigate();
 
-  console.log(nombre);
+  // console.log(nombre);
 
   const cerrarSesion = () => {
     const resultado = window.confirm(
@@ -134,6 +134,7 @@ function Administrador() {
 
   useEffect(() => {
     // Deshabilitar el botón de retroceso
+
     const disableBackButton = (event) => {
       event.preventDefault();
       window.history.forward(); // Navegar hacia adelante

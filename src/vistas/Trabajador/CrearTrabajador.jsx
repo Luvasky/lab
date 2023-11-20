@@ -79,6 +79,42 @@ function CrearCuenta() {
   const hacerPeticion = async (e) => {
     setBlockButton(true);
 
+    if (
+      capturar.numeroDocumento === "" ||
+      !/^\d+(\.\d+)?$/.test(capturar.numeroDocumento) ||
+      capturar.numeroDocumento.endsWith(".")
+    ) {
+      alert(
+        "EL DOCUMENTO DEBE SER UN NÚMERO Y NO DEBE CONTENER CARACTERES ESPECIALES"
+      );
+      setBlockButton(false);
+      return;
+    }
+
+    if (
+      capturar.celular === "" ||
+      !/^\d+(\.\d+)?$/.test(capturar.celular) ||
+      capturar.numeroDocumento.endsWith(".")
+    ) {
+      alert(
+        "EL CELULAR DEBE SER UN NÚMERO Y NO DEBE CONTENER CARACTERES ESPECIALES"
+      );
+      setBlockButton(false);
+      return;
+    }
+
+    if (
+      capturar.edad === "" ||
+      !/^\d+(\.\d+)?$/.test(capturar.edad) ||
+      capturar.numeroDocumento.endsWith(".")
+    ) {
+      alert(
+        "LA EDAD DEBE SER UN NÚMERO Y NO DEBE CONTENER CARACTERES ESPECIALES"
+      );
+      setBlockButton(false);
+      return;
+    }
+
     // console.log(capturar);
     if (
       capturar.tipoDocumento === "" ||
@@ -196,10 +232,10 @@ function CrearCuenta() {
       value: "Tecnico",
       label: "Tecnico",
     },
-    {
-      value: "Laboratorio",
-      label: "Labratorio",
-    },
+    // {
+    //   value: "Laboratorio",
+    //   label: "Labratorio",
+    // },
   ];
 
   const sede = [
@@ -214,23 +250,23 @@ function CrearCuenta() {
       value: "Cedula",
       label: "Cedula",
     },
-    {
-      value: "Tarjeta de indentidad",
-      label: "Tarjeta de identidad",
-    },
-    {
-      value: "Pasaporte",
-      label: "Pasaporte",
-    },
-    {
-      value: "Permiso especial",
-      label: "Permiso especial",
-    },
+    // {
+    //   value: "Tarjeta de indentidad",
+    //   label: "Tarjeta de identidad",
+    // },
+    // {
+    //   value: "Pasaporte",
+    //   label: "Pasaporte",
+    // },
+    // {
+    //   value: "Permiso especial",
+    //   label: "Permiso especial",
+    // },
 
-    {
-      value: "Otro",
-      label: "Otro",
-    },
+    // {
+    //   value: "Otro",
+    //   label: "Otro",
+    // },
   ];
 
   const nombreInputs = [

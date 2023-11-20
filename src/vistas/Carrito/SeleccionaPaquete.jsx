@@ -360,7 +360,7 @@ function SeleccionaPaquete() {
                 <input
                   type="hidden"
                   name="public-key"
-                  value="pub_test_jGZdlZTIT9P3LU2IKMYQfuT3JDyqpm0A"
+                  value="pub_prod_IQ3EspNkdMIX50SFcqkTGKQSY7dxAu6H"
                 />
                 <input type="hidden" name="currency" value="COP" />
                 <input
@@ -376,7 +376,7 @@ function SeleccionaPaquete() {
                 <input
                   type="hidden"
                   name="data-signature:integrity"
-                  value="test_integrity_1SCRqtCbDBQmfJH0tmGOJtoZsDx8e98T"
+                  value="prod_integrity_Pv5nJFBaTpAIJnthkWZPIMkjqTSeFwlL"
                 />
 
                 <Button

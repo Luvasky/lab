@@ -142,6 +142,30 @@ function EditarPaciente() {
   const hacerPeticion = async (e) => {
     setBlockButton(true);
 
+    if (
+      capturar.celular === "" ||
+      !/^\d+(\.\d+)?$/.test(capturar.celular) ||
+      capturar.numeroDocumento.endsWith(".")
+    ) {
+      alert(
+        "EL CELULAR DEBE SER UN NÚMERO Y NO DEBE CONTENER CARACTERES ESPECIALES"
+      );
+      setBlockButton(false);
+      return;
+    }
+
+    if (
+      capturar.edad === "" ||
+      !/^\d+(\.\d+)?$/.test(capturar.edad) ||
+      capturar.numeroDocumento.endsWith(".")
+    ) {
+      alert(
+        "LA EDAD DEBE SER UN NÚMERO Y NO DEBE CONTENER CARACTERES ESPECIALES"
+      );
+      setBlockButton(false);
+      return;
+    }
+
     // console.log(capturar);
     if (
       capturar.tipoDocumento === "" ||
@@ -161,24 +185,20 @@ function EditarPaciente() {
       setCamposVacios(true);
       setBlockButton(false);
     } else {
-      if (capturar.confContrasena !== capturar.contrasena) {
-        setCoincide(true);
+      if (
+        !/[a-z]/.test(capturar.contrasena) ||
+        !/[A-Z]/.test(capturar.contrasena) ||
+        capturar.contrasena.length < 7
+      ) {
+        alert(
+          "La contraseña debe contener al menos una letra mayúscula y una minúscula, ademas debe tener una logitud minima de 7 caractesres"
+        );
         setBlockButton(false);
-      } else {
-        if (
-          !/[a-z]/.test(capturar.contrasena) ||
-          !/[A-Z]/.test(capturar.contrasena) ||
-          capturar.contrasena.length < 7
-        ) {
-          alert(
-            "La contraseña debe contener al menos una letra mayúscula y una minúscula, ademas debe tener una logitud minima de 7 caractesres"
-          );
-          setBlockButton(false);
-          return; // Stop further processing if the password is not secure
-        }
-
+        return; // Stop further processing if the password is not secure
+      }
+      {
         await fetch(
-          `https://apilnfg-production.up.railway.app/actualizarPaciente/${capturar.numeroDocumento}`,
+          `https://apilnfg-production.up.railway.app/apiLNFG/actualizarPaciente/${capturar.numeroDocumento}`,
           {
             method: "PUT",
             headers: {

@@ -37,27 +37,27 @@ function Usuario() {
     }
   };
 
-  useEffect(() => {
-    // Deshabilitar el botón de retroceso
-    const disableBackButton = (event) => {
-      event.preventDefault();
-      window.history.forward(); // Navegar hacia adelante
-    };
+  // useEffect(() => {
+  //   // Deshabilitar el botón de retroceso
+  //   const disableBackButton = (event) => {
+  //     event.preventDefault();
+  //     window.history.forward(); // Navegar hacia adelante
+  //   };
 
-    window.history.pushState(null, "", window.location.pathname);
-    window.addEventListener("popstate", disableBackButton);
+  //   window.history.pushState(null, "", window.location.pathname);
+  //   window.addEventListener("popstate", disableBackButton);
 
-    // Aquí podrías realizar alguna lógica de autenticación, por ejemplo, verificar si el usuario está autenticado
-    // Simulemos que la autenticación es exitosa después de 2 segundos
-    const timeoutId = setTimeout(() => {
-      setAutenticado(true);
-    }, 2000);
+  //   // Aquí podrías realizar alguna lógica de autenticación, por ejemplo, verificar si el usuario está autenticado
+  //   // Simulemos que la autenticación es exitosa después de 2 segundos
+  //   const timeoutId = setTimeout(() => {
+  //     setAutenticado(true);
+  //   }, 2000);
 
-    return () => {
-      window.removeEventListener("popstate", disableBackButton);
-      clearTimeout(timeoutId);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("popstate", disableBackButton);
+  //     clearTimeout(timeoutId);
+  //   };
+  // }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -75,18 +75,23 @@ function Usuario() {
             justifyContent: "space-between",
           }}
         >
-          <Box>
+          <Box sx={{ margin: "2%" }}>
             <img src={LOGO}></img>
           </Box>
-          <Box sx={{ display: { xs: "none", md: "inline" } }}>
-            <Button
+          <Box
+            sx={{
+              display: { xs: "block", md: "inline" },
+              marginLeft: { xs: "1" },
+            }}
+          >
+            {/* <Button
               sx={{ color: "rgb( 255, 89, 0 )" }}
               onClick={() =>
                 navigate(`/vistaTengoExamen?documento=${documento}`)
               }
             >
               Ya tengo una orden médica!
-            </Button>
+            </Button> */}
             <Button
               sx={{ color: "rgb( 255, 89, 0 )" }}
               onClick={() => cerrarSesion()}

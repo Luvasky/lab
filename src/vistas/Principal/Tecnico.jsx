@@ -61,18 +61,16 @@ function Tecnico() {
   };
 
   useEffect(() => {
-    // Deshabilitar el botón de retroceso
-    const disableBackButton = (event) => {
-      event.preventDefault();
-      window.history.forward(); // Navegar hacia adelante
-    };
-
-    window.history.pushState(null, "", window.location.pathname);
-    window.addEventListener("popstate", disableBackButton);
-
-    return () => {
-      window.removeEventListener("popstate", disableBackButton);
-    };
+    // // Deshabilitar el botón de retroceso
+    // const disableBackButton = (event) => {
+    //   event.preventDefault();
+    //   window.history.forward(); // Navegar hacia adelante
+    // };
+    // window.history.pushState(null, "", window.location.pathname);
+    // window.addEventListener("popstate", disableBackButton);
+    // return () => {
+    //   window.removeEventListener("popstate", disableBackButton);
+    // };
   }, []);
 
   return (
