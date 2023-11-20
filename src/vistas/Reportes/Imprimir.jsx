@@ -97,7 +97,9 @@ function Imprimir() {
       pdf.text(`Id Orden: ${item.id_orden}`, 130, yPosition + lineHeight - 10);
       const fecha = new Date(item.fecha_examen);
       pdf.text(
-        `Fecha: ${fecha.toLocaleDateString()}`,
+        `Fecha: ${new Date(
+          fecha.getTime() + 24 * 60 * 60 * 1000
+        ).toLocaleDateString()}`,
         20,
         yPosition + lineHeight
       );
@@ -188,7 +190,15 @@ function Imprimir() {
                   // sx={{ backgroundColor: "red" }}
                 >
                   <Box>
-                    Fecha: {new Date(item.fecha_examen).toLocaleDateString()}
+                    Fecha:{" "}
+                    {new Date(
+                      new Date(item.fecha_examen).getTime() +
+                        24 * 60 * 60 * 1000
+                    ).toLocaleDateString("es-ES", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                    })}
                   </Box>
                 </Grid>
 

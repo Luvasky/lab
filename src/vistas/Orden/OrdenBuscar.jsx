@@ -398,6 +398,17 @@ function OrdenBuscar() {
     setBlock(true);
 
     if (
+      datosSecundario.valorDomicilio === "" ||
+      /[^\d.]/.test(datosSecundario.valorDomicilio)
+    ) {
+      alert(
+        "EL VALOR DEL DOMICILIO DEBE SER UN NÚMERO ENTERO Y NO DEBE CONTENER CARACTERES ESPECIALES"
+      );
+      setBlock(false);
+      return;
+    }
+
+    if (
       datosrden.examenes === "" ||
       datosrden.paquetes === "" ||
       datosrden.descripcionPaquete === "" ||
@@ -705,6 +716,9 @@ function OrdenBuscar() {
               </Grid>
               <Grid xs={12} sm={6} md={6} lg={6} padding={2}>
                 <TextField
+                  disabled={
+                    datosSecundario.tipoPaciente !== "PREPAGADA" ? true : false
+                  }
                   onChange={capturarDatosSecundarios}
                   name="copago"
                   label="Copago"
