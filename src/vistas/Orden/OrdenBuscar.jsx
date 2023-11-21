@@ -16,6 +16,7 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Push from "push.js";
 
 function OrdenBuscar() {
   const navigate = useNavigate();
@@ -469,6 +470,7 @@ function OrdenBuscar() {
       )
         .then((res) => res.json())
         .then((respuesta) => {
+          notificacion();
           console.log(respuesta);
           actualizarDireccion(
             datos.numerDocumento,
@@ -588,6 +590,18 @@ function OrdenBuscar() {
       value: "DOMICILIO",
     },
   ];
+
+  const notificacion = (id) => {
+    Push.create("LAB. NANCY FLOREZ GARCIA", {
+      body: `ORDEN ASIGANDA`,
+      icon: logo,
+      timeout: 4000,
+      onClick: function () {
+        window.focus();
+        this.close();
+      },
+    });
+  };
 
   return (
     <Box>

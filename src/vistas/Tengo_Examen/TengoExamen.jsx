@@ -12,6 +12,7 @@ import LOGO from "./LOGO2.png";
 import { useNavigate, useLocation } from "react-router-dom";
 import MuiAlert from "@mui/material/Alert";
 import Exitoso from "./Exitoso";
+import Push from "push.js";
 
 function TengoExamen() {
   const Alert = React.forwardRef(function Alert(props, ref) {
@@ -108,6 +109,7 @@ function TengoExamen() {
       )
         .then((res) => res.json())
         .then((respuesta) => {
+          notificacion();
           console.log(respuesta);
           setExitoso(true);
         });
@@ -148,6 +150,18 @@ function TengoExamen() {
         setCargando(false);
       });
   }, []);
+
+  const notificacion = () => {
+    Push.create("LAB. NANCY FLOREZ GARCIA", {
+      body: "NUEVA SOLICITUD ",
+      icon: "/path/to/icon.png",
+      timeout: 4000,
+      onClick: function () {
+        window.focus();
+        this.close();
+      },
+    });
+  };
 
   return (
     <Box>

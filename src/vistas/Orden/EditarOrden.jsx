@@ -8,6 +8,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import Push from "push.js";
 
 function EditarOrden() {
   const location = useLocation();
@@ -64,6 +65,7 @@ function EditarOrden() {
         return response.json();
       })
       .then((data) => {
+        notificacion(id_orden);
         console.log("Respuesta del servidor:", data);
         // Realiza cualquier acción adicional con la respuesta del servidor
         setCancelado(false);
@@ -248,6 +250,18 @@ function EditarOrden() {
       lg: 12,
     },
   ];
+
+  const notificacion = (id) => {
+    Push.create("LAB. NANCY FLOREZ GARCIA", {
+      body: `ORDEN ${id} CANCELADAD`,
+      icon: logo,
+      timeout: 4000,
+      onClick: function () {
+        window.focus();
+        this.close();
+      },
+    });
+  };
 
   useEffect(() => {
     datosBd();

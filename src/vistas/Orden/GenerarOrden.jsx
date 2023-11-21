@@ -16,6 +16,7 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Push from "push.js";
 
 function GenerarOrden() {
   const navigate = useNavigate();
@@ -235,6 +236,7 @@ function GenerarOrden() {
     )
       .then((res) => res.json())
       .then((respuesta) => {
+        console.log(respuesta);
         setDatos({
           nombre: respuesta.respuesta.nombre,
           segundoNombre: respuesta.respuesta.segundo_nombre,
@@ -461,6 +463,8 @@ function GenerarOrden() {
       )
         .then((res) => res.json())
         .then((respuesta) => {
+          notificacion();
+
           console.log(respuesta);
           actualizarDireccion(
             datos.numerDocumento,
@@ -472,6 +476,18 @@ function GenerarOrden() {
     }
 
     setBlock(false);
+  };
+
+  const notificacion = () => {
+    Push.create("LAB. NANCY FLOREZ GARCIA", {
+      body: "Orden asignada",
+      icon: logo,
+      timeout: 4000,
+      onClick: function () {
+        window.focus();
+        this.close();
+      },
+    });
   };
 
   useEffect(() => {

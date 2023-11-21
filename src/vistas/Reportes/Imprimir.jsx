@@ -76,17 +76,19 @@ function Imprimir() {
       return {}; // Retornar un objeto vacío en caso de error
     }
   };
+
   const generarPDF = () => {
     const pdf = new jsPDF();
     let yPosition = 20; // Inicializa la posición Y
     let currentPage = 1;
 
-    pdf.text("ORDENES DEL DIA", 20, yPosition);
+    pdf.text("ORDENES DEL DIA", 70, yPosition);
     datosMostrar.forEach((item, index) => {
-      const lineHeight = 10; // Ajusta este valor según tus necesidades
+      const lineHeight = 5; // Ajusta este valor según tus necesidades
+      const maxWidth = 100; // Ajusta este valor según tus necesidades
 
       // Verifica si hay espacio suficiente en la página actual
-      if (yPosition + 60 > pdf.internal.pageSize.height) {
+      if (yPosition + 80 > pdf.internal.pageSize.height) {
         // Cambia a una nueva página
         pdf.addPage();
         yPosition = 20; // Reinicia la posición Y en la nueva página
@@ -94,52 +96,131 @@ function Imprimir() {
       }
 
       pdf.setFontSize(8); // Ajusta este valor según tus necesidades
-      pdf.text(`Id Orden: ${item.id_orden}`, 130, yPosition + lineHeight - 10);
+
+      // Función para agregar texto con salto de línea
+      const addTextWithWrap = (text, x, y, lineHeight, maxWidth) => {
+        const words = pdf.splitTextToSize(text, maxWidth);
+        words.forEach((word, i) => {
+          pdf.text(word, x, y + i * lineHeight);
+        });
+        return words.length * lineHeight;
+      };
+
+      pdf.text(`Id Orden: ${item.id_orden}`, 130, yPosition + lineHeight + 4);
       const fecha = new Date(item.fecha_examen);
       pdf.text(
         `Fecha: ${new Date(
           fecha.getTime() + 24 * 60 * 60 * 1000
         ).toLocaleDateString()}`,
-        20,
-        yPosition + lineHeight
+        130,
+        yPosition + 3 * lineHeight
       );
 
       pdf.text(
         `Documento: ${item.datosPaciente.respuesta.documento}`,
         130,
-        yPosition + lineHeight
+        yPosition + 4 * lineHeight
       );
-      pdf.text(
+
+      const pacienteHeight = addTextWithWrap(
         `Paciente: ${item.datosPaciente.respuesta.nombre} ${item.datosPaciente.respuesta.segundo_nombre} ${item.datosPaciente.respuesta.primer_apellido} ${item.datosPaciente.respuesta.segundo_apellido}`,
         20,
-        yPosition + 2 * lineHeight
+        yPosition + 2 * lineHeight,
+        lineHeight,
+        maxWidth
       );
+
       pdf.text(
-        `Valor Factura: ${item.valor_factura}`,
+        `Celular : ${item.datosPaciente.respuesta.celular}`,
         130,
-        yPosition + 2 * lineHeight
+        yPosition + 4 * lineHeight + pacienteHeight
       );
-      pdf.text(`Examenes: ${item.examenes}`, 20, yPosition + 3 * lineHeight);
-      pdf.text(`Paquetes: ${item.paquetes}`, 20, yPosition + 4 * lineHeight);
+
       pdf.text(
+        `Valor Copago: $ ${item.valor_copago}`,
+        130,
+        yPosition + 5 * lineHeight + pacienteHeight
+      );
+
+      pdf.text(
+        `Valor Examenes: $ ${item.valor_examenes}`,
+        130,
+        yPosition + 6 * lineHeight + pacienteHeight
+      );
+
+      pdf.text(
+        `Valor Paquetes: $ ${item.valor_paquetes}`,
+        130,
+        yPosition + 7 * lineHeight + pacienteHeight
+      );
+
+      pdf.text(
+        `Valor Domicilio: $ ${item.valor_domicilio}`,
+        130,
+        yPosition + 8 * lineHeight + pacienteHeight
+      );
+
+      pdf.text(
+        `Valor Factura: $ ${item.valor_factura}`,
+        130,
+        yPosition + 9 * lineHeight + pacienteHeight
+      );
+
+      const examenesHeight = addTextWithWrap(
+        `Examenes: ${item.examenes}`,
+        20,
+        yPosition + 2 * lineHeight + pacienteHeight,
+        lineHeight,
+        maxWidth
+      );
+
+      const paquetesHeight = addTextWithWrap(
+        `Paquetes: ${item.paquetes}`,
+        20,
+        yPosition + 3 * lineHeight + pacienteHeight + examenesHeight,
+        lineHeight,
+        maxWidth
+      );
+
+      const descripcionHeight = addTextWithWrap(
         `Descripcion: ${item.datosPaciente.respuesta.desc_dir}`,
-        130,
-        yPosition + 4 * lineHeight
+        20,
+        yPosition + 7 * lineHeight + pacienteHeight + examenesHeight,
+        lineHeight,
+        maxWidth
       );
 
       pdf.text(
         `Direccion: ${item.datosPaciente.respuesta.direccion}`,
-        130,
-        yPosition + 3 * lineHeight
+        20,
+        yPosition + 6 * lineHeight + pacienteHeight + examenesHeight
       );
 
       // Agrega más información según sea necesario
 
       // Agrega una línea separadora entre cada entrada
-      pdf.line(20, yPosition + 5 * lineHeight, 190, yPosition + 5 * lineHeight);
+      pdf.line(
+        20,
+        yPosition +
+          10 * lineHeight +
+          pacienteHeight +
+          examenesHeight +
+          descripcionHeight,
+        190,
+        yPosition +
+          10 * lineHeight +
+          pacienteHeight +
+          examenesHeight +
+          descripcionHeight
+      );
 
       // Incrementa la posición Y para la próxima entrada
-      yPosition += 6 * lineHeight; // Ajusta este valor según tus necesidades
+      yPosition +=
+        11 * lineHeight +
+        pacienteHeight +
+        examenesHeight +
+        descripcionHeight +
+        paquetesHeight; // Ajusta este valor según tus necesidades
     });
 
     // Guarda el PDF con el nombre y extensión
