@@ -319,7 +319,7 @@ function Imprimir() {
                   // sx={{ backgroundColor: "blue" }}
                 >
                   <Box sx={{ display: "flex", justifyContent: "end" }}>
-                    Valor Factura : $ {item.valor_factura}
+                    Celular : {item.datosPaciente.respuesta.celular}
                   </Box>
                 </Grid>
                 <Grid
@@ -333,7 +333,6 @@ function Imprimir() {
                 >
                   <Box>Examenes: {item.examenes}</Box>
                 </Grid>
-
                 <Grid
                   padding={2}
                   item
@@ -344,7 +343,31 @@ function Imprimir() {
                   // sx={{ backgroundColor: "blue" }}
                 >
                   <Box sx={{ display: "flex", justifyContent: "end" }}>
-                    Paquetes: {item.paquetes}
+                    Valor Domicilio : $ {item.valor_domicilio}
+                  </Box>
+                </Grid>
+                <Grid
+                  padding={2}
+                  item
+                  lg={6}
+                  md={6}
+                  sm={6}
+                  xs={6}
+                  // sx={{ backgroundColor: "blue" }}
+                >
+                  <Box sx={{ display: "flex" }}>Paquetes: {item.paquetes}</Box>
+                </Grid>
+                <Grid
+                  padding={2}
+                  item
+                  lg={6}
+                  md={6}
+                  sm={6}
+                  xs={6}
+                  //sx={{ backgroundColor: "blue" }}
+                >
+                  <Box sx={{ display: "flex", justifyContent: "end" }}>
+                    Valor Examenes : $ {item.valor_examenes}
                   </Box>
                 </Grid>
                 <Grid
@@ -369,7 +392,60 @@ function Imprimir() {
                   // sx={{ backgroundColor: "blue" }}
                 >
                   <Box sx={{ display: "flex", justifyContent: "end" }}>
+                    Valor Paquetes : $ {item.valor_paquetes}
+                  </Box>
+                </Grid>
+                <Grid
+                  padding={2}
+                  item
+                  lg={6}
+                  md={6}
+                  sm={6}
+                  xs={6}
+                  // sx={{ backgroundColor: "blue" }}
+                >
+                  <Box sx={{ display: "flex" }}>
                     Descripcion: {item.datosPaciente.respuesta.desc_dir}
+                  </Box>
+                </Grid>
+
+                <Grid
+                  padding={2}
+                  item
+                  lg={6}
+                  md={6}
+                  sm={6}
+                  xs={6}
+                  // sx={{ backgroundColor: "blue" }}
+                >
+                  <Box sx={{ display: "flex", justifyContent: "end" }}>
+                    Valor Copago : $ {item.valor_copago}
+                  </Box>
+                </Grid>
+
+                <Grid
+                  sx={{ display: "flex" }}
+                  padding={2}
+                  item
+                  lg={6}
+                  md={6}
+                  sm={6}
+                  xs={6}
+                >
+                  <Box></Box>
+                </Grid>
+
+                <Grid
+                  padding={2}
+                  item
+                  lg={6}
+                  md={6}
+                  sm={6}
+                  xs={6}
+                  // sx={{ backgroundColor: "blue" }}
+                >
+                  <Box sx={{ display: "flex", justifyContent: "end" }}>
+                    Valor Factura $: {item.valor_factura}
                   </Box>
                 </Grid>
               </Grid>

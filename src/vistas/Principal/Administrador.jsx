@@ -135,6 +135,10 @@ function Administrador() {
   useEffect(() => {
     // Deshabilitar el botón de retroceso
 
+    // if (nombre === null) {
+    //   navigate("/");
+    // }
+
     const disableBackButton = (event) => {
       event.preventDefault();
       window.history.forward(); // Navegar hacia adelante

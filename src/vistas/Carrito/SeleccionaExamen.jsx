@@ -43,6 +43,7 @@ function SeleccionaExamen() {
   const documento = new URLSearchParams(location.search).get("documento");
   console.log(documento);
 
+  const referencia = "";
   const style = {
     position: "absolute",
     top: "50%",
@@ -61,19 +62,24 @@ function SeleccionaExamen() {
   const [openCart, setOpenCart] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
   const handleOpenCart = async () => {
     setOpenCart(true);
 
-    setCountClcik(countClcik + 1);
-    console.log(cartItems);
+    // setCountClcik(countClcik + 1);
+    // console.log(cartItems);
 
-    if (countClcik > 1) {
-      await generatePaymentReference();
-    }
-    // Wait for payment reference generation
-    console.log(paymentReference);
-    // requestTableWompy();
+    // if (countClcik >= 2) {
+    //   // Only generate a new reference when the count is 2 or more
+    //   const newReference = await generatePaymentReference();
+    //   setPaymentReference(newReference);
+    // }
+
+    // // Wait for payment reference generation
+    // console.log(paymentReference);
+    // // requestTableWompy();
   };
+
   const handleCloseCart = () => {
     setOpenCart(false);
     requestDelete();
@@ -133,6 +139,20 @@ function SeleccionaExamen() {
   };
 
   const requestTableWompy = async (e) => {
+    setCountClcik(countClcik + 1);
+    console.log(cartItems);
+
+    if (countClcik >= 2) {
+      // Only generate a new reference when the count is 2 or more
+      const newReference = await generatePaymentReference();
+      setPaymentReference(newReference);
+      console.log("ESTOY ENTRNDO");
+    }
+
+    // Wait for payment reference generation
+    console.log(paymentReference);
+    // requestTableWompy();
+
     setcargandoDeacuerdo(true);
 
     const cartItemsString = cartItems.map((item) => item.nombre);
@@ -184,7 +204,10 @@ function SeleccionaExamen() {
   };
   useEffect(() => {
     InitialRequire();
-    generatePaymentReference();
+
+    generatePaymentReference().then((reference) => {
+      setPaymentReference(reference); // Almacena la referencia generada en el estado
+    });
 
     // // Deshabilitar el botón de retroceso
     // const disableBackButton = (event) => {

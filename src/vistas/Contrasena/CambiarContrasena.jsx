@@ -33,10 +33,13 @@ function CambiarContrasena() {
 
   const cambiarContrasena = () => {
     setEnviar(true);
+
     if (datos.contrasena === "" || datos.nuevaContrasena === "") {
       alert("Todos los campos son obligatorios");
+      setEnviar(false); // Agrega esta línea para deshabilitar el envío si hay campos vacíos
     } else if (datos.contrasena !== datos.nuevaContrasena) {
       alert("Las contraseñas no coinciden");
+      setEnviar(false); // Agrega esta línea para deshabilitar el envío si las contraseñas no coinciden
     } else {
       const options = {
         method: "PUT",
@@ -60,16 +63,16 @@ function CambiarContrasena() {
         })
         .then((data) => {
           console.log("Respuesta del servidor:", data);
-          setEnviar(false);
-          alert("Contrasea actualizada con exito");
+          alert("Contraseña actualizada con éxito");
+          navigate(-1);
         })
         .catch((error) => {
           console.error("Error al realizar la solicitud:", error);
-          setEnviar(false);
+        })
+        .finally(() => {
+          setEnviar(false); // Asegúrate de restablecer 'enviar' incluso si hay un error
         });
     }
-
-    setEnviar(false);
   };
 
   return (

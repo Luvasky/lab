@@ -121,6 +121,15 @@ function SeleccionaPaquete() {
   };
 
   const requestTableWompy = async (e) => {
+    setCountClcik(countClcik + 1);
+    console.log(cartItems);
+
+    if (countClcik >= 2) {
+      // Only generate a new reference when the count is 2 or more
+      const newReference = await generatePaymentReference();
+      setPaymentReference(newReference);
+      console.log("ESTOY ENTRNDO");
+    }
     const cartItemsString = cartItems.map((item) => item.nombre);
 
     // Join the items into a single comma-separated string
@@ -166,7 +175,9 @@ function SeleccionaPaquete() {
 
   useEffect(() => {
     InitialRequire();
-    generatePaymentReference();
+    generatePaymentReference().then((reference) => {
+      setPaymentReference(reference); // Almacena la referencia generada en el estado
+    });
   }, []);
 
   return !cargando ? (
