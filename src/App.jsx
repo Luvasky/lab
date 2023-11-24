@@ -40,6 +40,7 @@ import IngresarCampos from "./vistas/Reportes/IngresarCampos";
 import Imprimir from "./vistas/Reportes/Imprimir";
 import VerOrdenTecnico from "./vistas/ExamenTecnico/VerOrdenTecnico";
 import CambiarContrasena from "./vistas/Contrasena/CambiarContrasena";
+import SolicitudTomada from "./vistas/Solicitud/SolicitudTomada";
 function App() {
   return (
     <div className="App">
@@ -207,6 +208,11 @@ function App() {
           <Route
             path="/vistaCambiarContrasena"
             element={<CambiarContrasena></CambiarContrasena>}
+          />
+
+          <Route
+            path="/vistaSolicitudTomada"
+            element={<SolicitudTomada></SolicitudTomada>}
           />
         </Routes>
       </BrowserRouter>

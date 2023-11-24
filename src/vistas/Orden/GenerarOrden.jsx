@@ -17,12 +17,14 @@ import InputAdornment from "@mui/material/InputAdornment";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Push from "push.js";
+import SolicitudTomada from "../Solicitud/SolicitudTomada";
 
 function GenerarOrden() {
   const navigate = useNavigate();
   const location = useLocation();
 
   const documento = new URLSearchParams(location.search).get("documento");
+  const idSolicitud = new URLSearchParams(location.search).get("solicitud");
 
   const [bloqCopago, setBloqCopago] = useState(false);
   const [exito, setExito] = useState(false);
@@ -71,6 +73,42 @@ function GenerarOrden() {
     valorPaquete: 0,
     valorFactura: 0,
   });
+
+  const estadoTomada = async () => {
+    // setCancelado(true);
+    await fetch(
+      `https://apilnfg-production.up.railway.app/apiLNFG/asignarTomada`,
+      {
+        method: "PUT", // O el método que estés utilizando
+        headers: {
+          "Content-Type": "application/json",
+          // Agrega cualquier otra cabecera necesaria aquí
+        },
+        // Puedes incluir un cuerpo de datos si es necesario
+        body: JSON.stringify({ idOrden: idSolicitud }),
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        notificacion(id_orden);
+        console.log("Respuesta del servidor:", data);
+        // Realiza cualquier acción adicional con la respuesta del servidor
+        setCancelado(false);
+        navigate(-1);
+      })
+      .catch((error) => {
+        console.error("Error al realizar la petición:", error);
+        // Maneja el error de alguna manera adecuada para tu aplicación
+        // setCancelado(false);
+      });
+
+    // setCancelado(false);
+  };
 
   const capturarDatos = (e) => {
     const { name, value } = e.target;
@@ -464,6 +502,8 @@ function GenerarOrden() {
         .then((res) => res.json())
         .then((respuesta) => {
           notificacion();
+
+          estadoTomada();
 
           console.log(respuesta);
           actualizarDireccion(

@@ -4,7 +4,7 @@ import { Paper, Box, Button, CircularProgress } from "@mui/material";
 import logo from "./LOGO2.png";
 import { useNavigate } from "react-router-dom";
 
-export default function AdministrarSolicitud() {
+export default function SolicitudTomada() {
   const navigate = useNavigate();
   const [datoProp, setDatoProp] = useState();
   const [examenes, setExamenes] = React.useState([]);
@@ -34,28 +34,26 @@ export default function AdministrarSolicitud() {
     { field: "tipo_servicio", headerName: "TIPO DE SERVICIO", width: 400 },
     { field: "estado", headerName: "ESTADO", width: 400 },
 
-    {
-      field: "accion",
-      headerName: "ACCIÓN",
-      width: 300,
-      renderCell: (params) => (
-        <Button
-          variant="contained"
-          onClick={() =>
-            handleAdministrar(params.row.documento, params.row.id_solicitud)
-          }
-        >
-          Generar Orden
-        </Button>
-      ),
-    },
+    // {
+    //   field: "accion",
+    //   headerName: "ACCIÓN",
+    //   width: 300,
+    //   renderCell: (params) => (
+    //     <Button
+    //       variant="contained"
+    //       onClick={() => handleAdministrar(params.row.documento)}
+    //     >
+    //       Generar Orden
+    //     </Button>
+    //   ),
+    // },
   ];
 
   const peticion = async () => {
     setCargando(true);
     try {
       const resul = await fetch(
-        "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaSolicitud",
+        "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaSolicitudTomada",
         {
           method: "GET",
         }
@@ -73,12 +71,10 @@ export default function AdministrarSolicitud() {
     }
   };
 
-  const handleAdministrar = (idExamen, idSolicitud) => {
+  const handleAdministrar = (idExamen) => {
     console.log("ID del examen seleccionado:", idExamen);
     setDatoProp(idExamen);
-    navigate(
-      `/vistaGenerarOrden?documento=${idExamen}&solicitud=${idSolicitud}`
-    );
+    navigate(`/vistaGenerarOrden?documento=${idExamen}`);
   };
 
   useEffect(() => {

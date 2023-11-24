@@ -87,9 +87,14 @@ const opcionesAdmin = [
     link: "/vistaAdministrarPaquete",
   },
   {
-    accion: "Administrar Solicitudes",
+    accion: "Solicitudes Pendientes",
     imagen: cuatro,
     link: "/vistaAdministrarSolicitud",
+  },
+  {
+    accion: "Solicitudes Tomadas",
+    imagen: cuatro,
+    link: "/vistaSolicitudTomada",
   },
   {
     accion: "Crear Empresa",
