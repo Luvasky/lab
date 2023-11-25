@@ -66,11 +66,11 @@ export default function AdministrarPaciente() {
       headerName: "ESTADO",
       width: 200,
     },
-    {
-      field: "tipo",
-      headerName: "TIPO",
-      width: 200,
-    },
+    // {
+    //   field: "tipo",
+    //   headerName: "TIPO",
+    //   width: 200,
+    // },
     {
       field: "direccion",
       headerName: "DIRECCION",

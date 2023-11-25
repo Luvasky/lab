@@ -13,6 +13,7 @@ export default function ExamenesTencnico() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [cargando, setCargando] = React.useState(false);
+  const [lista, setLista] = useState(false);
 
   const columns = [
     { field: "id_orden", headerName: "ID", width: 200 },
@@ -32,9 +33,10 @@ export default function ExamenesTencnico() {
     { field: "req_examenes", headerName: "REQUISITOS EXAMENES", width: 400 },
     { field: "paquetes", headerName: "PAQUETES", width: 400 },
     { field: "req_paquetes", headerName: "REQUISITOS PAQUETES", width: 400 },
+    { field: "tipo_paciente", headerName: "TIPO PACIENTE", width: 400 },
     {
       field: "valor_factura",
-      headerName: "VALOR",
+      headerName: "VALOR FACTURA",
       width: 400,
       valueFormatter: (params) => {
         return new Intl.NumberFormat("es-CO", {
@@ -46,16 +48,91 @@ export default function ExamenesTencnico() {
     },
 
     {
+      field: "valor_domicilio",
+      headerName: "VALOR DOMICILIO",
+      width: 400,
+      valueFormatter: (params) => {
+        return new Intl.NumberFormat("es-CO", {
+          style: "currency",
+          currency: "COP",
+          minimumFractionDigits: 0,
+        }).format(params.value);
+      },
+    },
+
+    {
+      field: "valor_examenes",
+      headerName: "VALOR EXAMENES",
+      width: 400,
+      valueFormatter: (params) => {
+        return new Intl.NumberFormat("es-CO", {
+          style: "currency",
+          currency: "COP",
+          minimumFractionDigits: 0,
+        }).format(params.value);
+      },
+    },
+
+    {
+      field: "valor_paquetes",
+      headerName: "VALOR PAQUETES",
+      width: 400,
+      valueFormatter: (params) => {
+        return new Intl.NumberFormat("es-CO", {
+          style: "currency",
+          currency: "COP",
+          minimumFractionDigits: 0,
+        }).format(params.value);
+      },
+    },
+
+    {
+      field: "valor_copago",
+      headerName: "VALOR COPAGO",
+      width: 400,
+      valueFormatter: (params) => {
+        return new Intl.NumberFormat("es-CO", {
+          style: "currency",
+          currency: "COP",
+          minimumFractionDigits: 0,
+        }).format(params.value);
+      },
+    },
+
+    { field: "estado", headerName: "ESTADO", width: 400 },
+    {
       field: "accion",
       headerName: "ACCIÓN",
-      width: 300,
+      width: 400,
       renderCell: (params) => (
-        <Button
-          variant="contained"
-          onClick={() => handleAdministrar(params.row)}
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
         >
-          VER ORDEN
-        </Button>
+          <Button
+            variant="contained"
+            onClick={() => handleAdministrar(params.row)}
+          >
+            VER ORDEN
+          </Button>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => realizada(params.row.id_orden)}
+          >
+            TOMADA
+          </Button>
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => rechazada(params.row.id_orden)}
+          >
+            RECHAZADA
+          </Button>
+        </Box>
       ),
     },
   ];
@@ -97,6 +174,9 @@ export default function ExamenesTencnico() {
       valor_domicilio,
       req_examenes,
       fecha_examen,
+      valor_examenes,
+      valor_copago,
+      tipo_paciente,
     } = row;
     // setDatoProp(idExamen);
     navigate(`/vistaVerOrdenTecnico?documento=${row}`, {
@@ -113,6 +193,9 @@ export default function ExamenesTencnico() {
         valor_domicilio,
         req_examenes,
         fecha_examen,
+        valor_examenes,
+        valor_copago,
+        tipo_paciente,
       },
     });
   };
@@ -120,6 +203,82 @@ export default function ExamenesTencnico() {
   useEffect(() => {
     peticion();
   }, []);
+
+  const realizada = async (id_orden) => {
+    setLista(true);
+    // setCancelado(true);
+    await fetch(`https://apilnfg-production.up.railway.app/apiLNFG/realizada`, {
+      method: "PUT", // O el método que estés utilizando
+      headers: {
+        "Content-Type": "application/json",
+        // Agrega cualquier otra cabecera necesaria aquí
+      },
+      // Puedes incluir un cuerpo de datos si es necesario
+      body: JSON.stringify({ idOrden: id_orden }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setLista(false);
+        console.log(examenes.id_orden);
+        // notificacion(id_orden);
+        console.log("Respuesta del servidor:", data);
+        // Realiza cualquier acción adicional con la respuesta del servidor
+        // setCancelado(false);
+        window.location.reload(); // Recarga la página después de la navegación
+      })
+      .catch((error) => {
+        console.log(examenes);
+        console.error("Error al realizar la petición:", error);
+        // Maneja el error de alguna manera adecuada para tu aplicación
+        // setCancelado(false);
+      });
+
+    // setCancelado(false);
+    setLista(false);
+  };
+
+  const rechazada = async (id_orden) => {
+    setLista(true);
+    // setCancelado(true);
+    await fetch(`https://apilnfg-production.up.railway.app/apiLNFG/rechazada`, {
+      method: "PUT", // O el método que estés utilizando
+      headers: {
+        "Content-Type": "application/json",
+        // Agrega cualquier otra cabecera necesaria aquí
+      },
+      // Puedes incluir un cuerpo de datos si es necesario
+      body: JSON.stringify({ idOrden: id_orden }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setLista(false);
+        console.log(examenes.id_orden);
+        // notificacion(id_orden);
+        console.log("Respuesta del servidor:", data);
+        // Realiza cualquier acción adicional con la respuesta del servidor
+        // setCancelado(false);
+        window.location.reload(); // Recarga la página después de la navegación
+      })
+      .catch((error) => {
+        console.log(examenes);
+        console.error("Error al realizar la petición:", error);
+        // Maneja el error de alguna manera adecuada para tu aplicación
+        // setCancelado(false);
+      });
+
+    // setCancelado(false);
+    setLista(false);
+  };
 
   return (
     <Paper sx={{ width: "100%", overflow: "hidden" }}>

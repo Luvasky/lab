@@ -34,6 +34,10 @@ function GenerarOrden() {
     valor_domicilio,
     req_examenes,
     fecha_examen,
+    valor_copago,
+    valor_paquetes,
+    tipo_paciente,
+    valor_examenes,
   } = location.state;
 
   console.log(id_paciente);
@@ -292,10 +296,95 @@ function GenerarOrden() {
 
               <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
                 <TextField
+                  //   disabled={
+                  //     datosSecundario.tipoServicio === "PRESENCIAL" ? true : false
+                  //   }
+                  name="valorDomicilio"
+                  fullWidth
+                  label="Tipo Pacinete"
+                  value={tipo_paciente}
+                  //   onChange={capturarDatosSecundarios}
+                ></TextField>
+              </Grid>
+
+              <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
+                <TextField
+                  name="precioFactura"
+                  helperText="Valor Copago"
+                  fullWidth
+                  value={valor_copago || 0}
+                  // InputProps={{
+                  //   readOnly: true, // Make the field read-only so the user can't edit it
+                  // }}
+
+                  InputProps={{
+                    readOnly: true, // Make the field read-only so the user can't edit it
+
+                    startAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton edge="start">
+                          <AttachMoneyIcon></AttachMoneyIcon>
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+
+              <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
+                <TextField
+                  name="precioFactura"
+                  helperText="Valor Examenes"
+                  fullWidth
+                  value={valor_examenes || 0}
+                  // InputProps={{
+                  //   readOnly: true, // Make the field read-only so the user can't edit it
+                  // }}
+
+                  InputProps={{
+                    readOnly: true, // Make the field read-only so the user can't edit it
+
+                    startAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton edge="start">
+                          <AttachMoneyIcon></AttachMoneyIcon>
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+
+              <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
+                <TextField
+                  name="precioFactura"
+                  helperText="Valor Paquetes"
+                  fullWidth
+                  value={valor_paquetes || 0}
+                  // InputProps={{
+                  //   readOnly: true, // Make the field read-only so the user can't edit it
+                  // }}
+
+                  InputProps={{
+                    readOnly: true, // Make the field read-only so the user can't edit it
+
+                    startAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton edge="start">
+                          <AttachMoneyIcon></AttachMoneyIcon>
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+              </Grid>
+
+              <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
+                <TextField
                   name="precioFactura"
                   helperText="Precio Factura"
                   fullWidth
-                  value={valor_factura}
+                  value={valor_factura || 0}
                   // InputProps={{
                   //   readOnly: true, // Make the field read-only so the user can't edit it
                   // }}

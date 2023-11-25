@@ -109,7 +109,6 @@ function CrearCuenta() {
       capturar.sexo === "" ||
       capturar.direccion === "" ||
       capturar.contrasena === "" ||
-      capturar.tipoPaciente === "" ||
       capturar.confContrasena === ""
     ) {
       setCamposVacios(true);
@@ -146,7 +145,7 @@ function CrearCuenta() {
               primer_apellido: capturar.primerApellido.toUpperCase().trim(),
               segundo_apellido: capturar.segundoApellido.toUpperCase().trim(),
               edad: capturar.edad.trim(),
-              tipo: capturar.tipoPaciente.toUpperCase().trim(),
+              tipo: capturar.tipoPaciente.toUpperCase().trim() || "NO",
               email: capturar.email.trim(),
               fecha_nacimiento: capturar.fechaNacimiento.trim(),
               celular: capturar.celular.trim(),
@@ -227,19 +226,19 @@ function CrearCuenta() {
       value: "Tarjeta de indentidad",
       label: "Tarjeta de identidad",
     },
-    {
-      value: "Pasaporte",
-      label: "Pasaporte",
-    },
-    {
-      value: "Permiso especial",
-      label: "Permiso especial",
-    },
+    // {
+    //   value: "Pasaporte",
+    //   label: "Pasaporte",
+    // },
+    // {
+    //   value: "Permiso especial",
+    //   label: "Permiso especial",
+    // },
 
-    {
-      value: "Otro",
-      label: "Otro",
-    },
+    // {
+    //   value: "Otro",
+    //   label: "Otro",
+    // },
   ];
 
   const nombreInputs = [
@@ -382,7 +381,7 @@ function CrearCuenta() {
 
           {/* container de tipo, celular y fecha */}
 
-          <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
+          {/* <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
             <TextField
               fullWidth
               error={camposVacios}
@@ -399,7 +398,7 @@ function CrearCuenta() {
                 </MenuItem>
               ))}
             </TextField>
-          </Grid>
+          </Grid> */}
 
           <Grid xs={12} sm={6} md={6} lg={6} padding={2}>
             <TextField

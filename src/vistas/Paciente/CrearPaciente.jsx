@@ -127,7 +127,6 @@ function CrearPaciente() {
       capturar.sexo === "" ||
       capturar.direccion === "" ||
       capturar.contrasena === "" ||
-      capturar.tipoPaciente === "" ||
       capturar.confContrasena === ""
     ) {
       setCamposVacios(true);
@@ -164,12 +163,12 @@ function CrearPaciente() {
               primer_apellido: capturar.primerApellido.toUpperCase().trim(),
               segundo_apellido: capturar.segundoApellido.toUpperCase().trim(),
               edad: capturar.edad.trim(),
-              tipo: capturar.tipoPaciente.toUpperCase().trim(),
+              tipo: capturar.tipoPaciente.toUpperCase().trim() || "NO",
               email: capturar.email.trim(),
               fecha_nacimiento: capturar.fechaNacimiento.trim(),
               celular: capturar.celular.trim(),
               contrasena: capturar.contrasena.trim(),
-              tipo: capturar.tipoPaciente.toUpperCase().trim(),
+              tipo: capturar.tipoPaciente.toUpperCase().trim() || "NO",
               direccion: capturar.direccion.toUpperCase().trim(),
               desc_direccion: capturar.descripcion.toUpperCase().trim(),
               sexo: capturar.sexo.toUpperCase().trim(),
@@ -392,7 +391,7 @@ function CrearPaciente() {
 
           {/* container de tipo, celular y fecha */}
 
-          <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
+          {/* <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
             <TextField
               fullWidth
               error={camposVacios}
@@ -409,7 +408,7 @@ function CrearPaciente() {
                 </MenuItem>
               ))}
             </TextField>
-          </Grid>
+          </Grid> */}
 
           <Grid xs={12} sm={12} md={12} lg={12} padding={2}>
             <TextField
