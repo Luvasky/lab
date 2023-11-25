@@ -41,6 +41,8 @@ import Imprimir from "./vistas/Reportes/Imprimir";
 import VerOrdenTecnico from "./vistas/ExamenTecnico/VerOrdenTecnico";
 import CambiarContrasena from "./vistas/Contrasena/CambiarContrasena";
 import SolicitudTomada from "./vistas/Solicitud/SolicitudTomada";
+import OrdenesRango from "./vistas/Orden/OrdenesRango";
+import VerOrdenesRango from "./vistas/Orden/VerOrdenesRango";
 function App() {
   return (
     <div className="App">
@@ -213,6 +215,16 @@ function App() {
           <Route
             path="/vistaSolicitudTomada"
             element={<SolicitudTomada></SolicitudTomada>}
+          />
+
+          <Route
+            path="/vistaOrdenesRango"
+            element={<OrdenesRango></OrdenesRango>}
+          />
+
+          <Route
+            path="/vistaVerOrdenesRango"
+            element={<VerOrdenesRango></VerOrdenesRango>}
           />
         </Routes>
       </BrowserRouter>
