@@ -113,6 +113,12 @@ const opcionesAdmin = [
     imagen: uno,
     link: "/vistaIngresarCampo",
   },
+
+  {
+    accion: "Ordenes por rango",
+    imagen: uno,
+    link: "/vistaOrdenesRango",
+  },
 ];
 
 function Administrador() {
