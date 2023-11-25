@@ -121,14 +121,14 @@ export default function ExamenesTencnico() {
           <Button
             variant="contained"
             color="success"
-            onClick={() => realizada(params.row.id_orden)}
+            onClick={() => realizada(params.row.id_orden, params.row.estado)}
           >
             TOMADA
           </Button>
           <Button
             variant="contained"
             color="error"
-            onClick={() => rechazada(params.row.id_orden)}
+            onClick={() => rechazada(params.row.id_orden, params.row.estado)}
           >
             RECHAZADA
           </Button>
@@ -204,8 +204,17 @@ export default function ExamenesTencnico() {
     peticion();
   }, []);
 
-  const realizada = async (id_orden) => {
+  const realizada = async (id_orden, estado) => {
     setLista(true);
+
+    if (estado === "REALIZADA") {
+      alert("LA ORDEN YA FUE REALIZADA");
+      return;
+    } else if (estado === "RECHAZADA") {
+      alert("LA ORDEN YA FUE RECHAZADA");
+      return;
+    }
+
     // setCancelado(true);
     await fetch(`https://apilnfg-production.up.railway.app/apiLNFG/realizada`, {
       method: "PUT", // O el método que estés utilizando
@@ -242,8 +251,17 @@ export default function ExamenesTencnico() {
     setLista(false);
   };
 
-  const rechazada = async (id_orden) => {
+  const rechazada = async (id_orden, estado) => {
     setLista(true);
+
+    if (estado === "REALIZADA") {
+      alert("LA ORDEN YA FUE REALIZADA");
+      return;
+    } else if (estado === "RECHAZADA") {
+      alert("LA ORDEN YA FUE RECHAZADA");
+      return;
+    }
+
     // setCancelado(true);
     await fetch(`https://apilnfg-production.up.railway.app/apiLNFG/rechazada`, {
       method: "PUT", // O el método que estés utilizando

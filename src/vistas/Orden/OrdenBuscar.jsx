@@ -245,6 +245,12 @@ function OrdenBuscar() {
     )
       .then((res) => res.json())
       .then((respuesta) => {
+        if (respuesta.respuesta === undefined) {
+          alert("Paciente no encontrado");
+          setBuscarPaciente(false);
+          return;
+        }
+
         setDatos({
           nombre: respuesta.respuesta.nombre,
           segundoNombre: respuesta.respuesta.segundo_nombre,
