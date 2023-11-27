@@ -29,20 +29,71 @@ export default function AdministrarSolicitudesWompi() {
     },
     { field: "examenes", headerName: "EXAMENES", width: 400 },
     { field: "paquetes", headerName: "PAQUETES", width: 400 },
+    { field: "estado", headerName: "ESTADO", width: 400 },
     {
       field: "accion",
       headerName: "ACCIÓN",
       width: 300,
       renderCell: (params) => (
-        <Button
-          variant="contained"
-          onClick={() => handleAdministrar(params.row.idwompi_solicitud)}
-        >
-          Administrar
-        </Button>
+        <Box>
+          <Button
+            variant="contained"
+            onClick={() => handleAdministrar(params.row.idwompi_solicitud)}
+          >
+            Administrar
+          </Button>
+          <Button
+            onClick={() =>
+              wompiTomada(params.row.estado, params.row.idwompi_solicitud)
+            }
+            variant="contained"
+            color="success"
+            sx={{ marginLeft: "20px" }}
+          >
+            TOMADA
+          </Button>
+        </Box>
       ),
     },
   ];
+
+  const wompiTomada = async (estado, idSolicitud) => {
+    if (estado === "TOMADA") {
+      alert("LA SOLICITUD YA FUE TOMADA");
+      return;
+    }
+
+    await fetch(
+      `https://apilnfg-production.up.railway.app/apiLNFG/wompiTomada`,
+      {
+        method: "POST", // O el método que estés utilizando
+        headers: {
+          "Content-Type": "application/json",
+          // Agrega cualquier otra cabecera necesaria aquí
+        },
+        // Puedes incluir un cuerpo de datos si es necesario
+        body: JSON.stringify({ idOrden: idSolicitud }),
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // notificacion(id_orden);
+        console.log("Respuesta del servidor:", data);
+        // Realiza cualquier acción adicional con la respuesta del servidor
+        // setCancelado(false);
+        window.location.reload(); // Recarga la página después de la navegación
+      })
+      .catch((error) => {
+        console.error("Error al realizar la petición:", error);
+        // Maneja el error de alguna manera adecuada para tu aplicación
+        // setCancelado(false);
+      });
+  };
 
   const peticion = async () => {
     setCargando(true);
