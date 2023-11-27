@@ -175,9 +175,8 @@ function SeleccionaPaquete() {
 
   useEffect(() => {
     InitialRequire();
-    generatePaymentReference().then((reference) => {
-      setPaymentReference(reference); // Almacena la referencia generada en el estado
-    });
+    const reference = generatePaymentReference();
+    setPaymentReference(reference);
   }, []);
 
   return !cargando ? (
