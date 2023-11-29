@@ -244,7 +244,11 @@ function GenerarOrden() {
                   name="fechaExamen"
                   fullWidth
                   helperText="Ingrese la fecha del examen"
-                  value={new Date(fecha_examen).toLocaleDateString()}
+                  value={new Date(
+                    new Date(fecha_examen).setDate(
+                      new Date(fecha_examen).getDate() + 1
+                    )
+                  ).toLocaleDateString("es-ES")}
                 ></TextField>
               </Grid>
 

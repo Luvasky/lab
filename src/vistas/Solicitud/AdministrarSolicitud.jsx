@@ -39,14 +39,27 @@ export default function AdministrarSolicitud() {
       headerName: "ACCIÓN",
       width: 300,
       renderCell: (params) => (
-        <Button
-          variant="contained"
-          onClick={() =>
-            handleAdministrar(params.row.documento, params.row.id_solicitud)
-          }
-        >
-          Generar Orden
-        </Button>
+        <Box>
+          <Button
+            variant="contained"
+            onClick={() =>
+              handleAdministrar(params.row.documento, params.row.id_solicitud)
+            }
+          >
+            Generar Orden
+          </Button>
+
+          <Button
+            variant="contained"
+            color="success"
+            sx={{ marginLeft: 5 }}
+            onClick={() =>
+              asignarTomada(params.row.tipo_servicio, params.row.id_solicitud)
+            }
+          >
+            TOMADA
+          </Button>
+        </Box>
       ),
     },
   ];
@@ -71,6 +84,44 @@ export default function AdministrarSolicitud() {
     } finally {
       setCargando(false);
     }
+  };
+
+  const asignarTomada = async (tipo_servicio, id_solicitud) => {
+    if (tipo_servicio === "DOMICILIO") {
+      alert("ESTE BOTON SOLO FUNCIONA CON SOLICITUDES DE TIPO PRESENCIAL");
+      return;
+    }
+
+    await fetch(
+      `https://apilnfg-production.up.railway.app/apiLNFG/asignarTomada`,
+      {
+        method: "PUT", // O el método que estés utilizando
+        headers: {
+          "Content-Type": "application/json",
+          // Agrega cualquier otra cabecera necesaria aquí
+        },
+        // Puedes incluir un cuerpo de datos si es necesario
+        body: JSON.stringify({ idOrden: id_solicitud }),
+      }
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // notificacion(id_orden);
+        console.log("Respuesta del servidor:", data);
+        // Realiza cualquier acción adicional con la respuesta del servidor
+        // setCancelado(false);
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error al realizar la petición:", error);
+        // Maneja el error de alguna manera adecuada para tu aplicación
+        // setCancelado(false);
+      });
   };
 
   const handleAdministrar = (idExamen, idSolicitud) => {

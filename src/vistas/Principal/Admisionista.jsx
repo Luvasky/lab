@@ -70,9 +70,14 @@ function Admisionista() {
     // },
 
     {
-      accion: "Administrar Solicitudes",
-      imagen: AdminExamen,
+      accion: "Solicitudes Pendientes",
+      imagen: examen,
       link: "/vistaAdministrarSolicitud",
+    },
+    {
+      accion: "Solicitudes Tomadas",
+      imagen: trabajador_clinico,
+      link: "/vistaSolicitudTomada",
     },
 
     {

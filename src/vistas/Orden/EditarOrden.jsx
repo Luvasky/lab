@@ -389,7 +389,11 @@ function EditarOrden() {
               <Grid xs={12} padding={2}>
                 <TextField
                   disabled={estado === "CANCELADO" ? true : false}
-                  value={new Date(fecha_examen).toLocaleDateString()}
+                  value={new Date(
+                    new Date(fecha_examen).setDate(
+                      new Date(fecha_examen).getDate() + 1
+                    )
+                  ).toLocaleDateString("es-ES")}
                   name="fechaExamen"
                   fullWidth
                   helperText="Fecha del examen"
