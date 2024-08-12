@@ -16,7 +16,7 @@ import examen from "./examen.jpg";
 import orden from "./orden-medica.png";
 // import AdministrarTrabajador from "./administrarTrabajador.jpg";
 // import AdministrarPaciente from "./AdministrarPaciente.jpg";
-import AdministrarOrden from "./AdministrarOrden.jpg";
+import AdministrarOrden from "./administrarOrden.jpg";
 // import noConforme from "./noConforme.jpg";
 // import EnviarOrden from "./EnviarOrden.jpg";
 // import AdministrarExamen from "./AdministrarExamen.jpg";
