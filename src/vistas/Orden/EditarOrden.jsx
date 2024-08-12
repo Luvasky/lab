@@ -46,18 +46,15 @@ function EditarOrden() {
 
   const cancelarOrden = async () => {
     setCancelado(true);
-    await fetch(
-      `https://apilnfg-production.up.railway.app/apiLNFG/cancelarOrden/${id_orden}`,
-      {
-        method: "PUT", // O el método que estés utilizando
-        headers: {
-          "Content-Type": "application/json",
-          // Agrega cualquier otra cabecera necesaria aquí
-        },
-        // Puedes incluir un cuerpo de datos si es necesario
-        // body: JSON.stringify({ key: 'value' }),
-      }
-    )
+    await fetch(`http://localhost:3000/apiLNFG/cancelarOrden/${id_orden}`, {
+      method: "PUT", // O el método que estés utilizando
+      headers: {
+        "Content-Type": "application/json",
+        // Agrega cualquier otra cabecera necesaria aquí
+      },
+      // Puedes incluir un cuerpo de datos si es necesario
+      // body: JSON.stringify({ key: 'value' }),
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -84,7 +81,7 @@ function EditarOrden() {
     setCargando(true);
 
     await fetch(
-      `https://apilnfg-production.up.railway.app/apiLNFG/obtenerPacienteDocumento/${id_paciente}`,
+      `http://localhost:3000/apiLNFG/obtenerPacienteDocumento/${id_paciente}`,
       {
         method: "GET", // Puedes cambiar a 'POST' u otro método según tu necesidad
         headers: {
@@ -121,7 +118,7 @@ function EditarOrden() {
     // PETICIO PARA OBTENER EL TECNICO
 
     fetch(
-      `https://apilnfg-production.up.railway.app/apiLNFG/obtenerTrabajadorDocumento/${id_tecnico}`,
+      `http://localhost:3000/apiLNFG/obtenerTrabajadorDocumento/${id_tecnico}`,
       {
         method: "GET",
         headers: {

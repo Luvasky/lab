@@ -127,9 +127,7 @@ function SeleccionaExamen() {
   };
 
   const InitialRequire = async () => {
-    await fetch(
-      "https://apilnfg-production.up.railway.app/apiLNFG/obetenerListaExamenesSinNo"
-    )
+    await fetch("http://localhost:3000/apiLNFG/obetenerListaExamenesSinNo")
       .then((res) => res.json())
       .then((respuesta) => {
         setExamen(respuesta.respuesta);
@@ -160,19 +158,16 @@ function SeleccionaExamen() {
     // Join the items into a single comma-separated string
     const joinedCartItems = cartItemsString.join(",");
 
-    await fetch(
-      "https://apilnfg-production.up.railway.app/apiLNFG/crearSolicitudWompi",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          idwompi_solicitud: paymentReference,
-          documento: documento,
-          examenes: joinedCartItems,
-          paquetes: "NO",
-        }),
-      }
-    ).then((res) => {
+    await fetch("http://localhost:3000/apiLNFG/crearSolicitudWompi", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        idwompi_solicitud: paymentReference,
+        documento: documento,
+        examenes: joinedCartItems,
+        paquetes: "NO",
+      }),
+    }).then((res) => {
       res.json().then((respuesta) => {
         console.log(respuesta);
         setcargandoDeacuerdo(false);
@@ -184,7 +179,7 @@ function SeleccionaExamen() {
   const requestDelete = async () => {
     try {
       const response = await fetch(
-        `https://apilnfg-production.up.railway.app/apiLNFG/borrarSolicitud/${paymentReference}`,
+        `http://localhost:3000/apiLNFG/borrarSolicitud/${paymentReference}`,
         {
           method: "DELETE",
         }
@@ -468,7 +463,7 @@ function SeleccionaExamen() {
                 <input
                   type="hidden"
                   name="redirect-url"
-                  value={`http://localhost:5173/`}
+                  value={`http://localhost:3000:5173/`}
                 />
 
                 <Button

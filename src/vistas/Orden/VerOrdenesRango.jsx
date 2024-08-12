@@ -87,20 +87,17 @@ export default function AdministrarOrden() {
   const peticion = async () => {
     setCargando(true);
     try {
-      const resul = await fetch(
-        "https://apilnfg-production.up.railway.app/apiLNFG/rango",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json", // Especifica el tipo de contenido del cuerpo
-          },
-          // Cuerpo de la solicitud
-          body: JSON.stringify({
-            inicial: datosProps.inicial,
-            final: datosProps.final,
-          }),
-        }
-      )
+      const resul = await fetch("http://localhost:3000/apiLNFG/rango", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Especifica el tipo de contenido del cuerpo
+        },
+        // Cuerpo de la solicitud
+        body: JSON.stringify({
+          inicial: datosProps.inicial,
+          final: datosProps.final,
+        }),
+      })
         .then((res) => res.json())
         .then((respuesta) => {
           console.log(respuesta.respuesta);

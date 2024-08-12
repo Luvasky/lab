@@ -26,43 +26,11 @@ function Login() {
   const location = useLocation();
   const navigate = useNavigate();
   const [estadoBoton, setEstadoBoton] = useState(false);
+
   const [estadoDocumento, setEstadoDocumento] = useState(false);
   const [estadoContrasena, setEstadoContrasena] = useState(false);
   const [credencialesIncorrectas, setCredencialesIncorrectas] = useState(false);
   const [see, setSee] = useState(false);
-
-  // const subcristion = async () => {
-  //   let register; // Declara la variable fuera del bloque try para que esté disponible fuera de él
-
-  //   try {
-  //     // Service Worker
-  //     register = await navigator.serviceWorker.register("./sw.js", {
-  //       scope: "/",
-  //     });
-
-  //     // console.log(register);
-
-  //     // Suscripción push
-  //     // const sub = await register.pushManager.subscribe({
-  //     //   userVisibleOnly: true,
-  //     //   applicationServerKey:
-  //     //     "BM6Gu-BCvsZvv9_o_WC7xv8oHYpllq0U_R1nQEIQPJ-rHCsBQAyhZOIStAdceuIQp2qrW0WLdhY4kLr-Uwdjuj0",
-  //     // });
-
-  //     // Envía la suscripción al servidor
-  //     await fetch("http://localhost:3000/apiLNFG/subscription", {
-  //       method: "POST",
-  //       // body: JSON.stringify(sub),
-  //       headers: {
-  //         "content-type": "application/json",
-  //       },
-  //     })
-  //       .then((response) => response.json())
-  //       .then((respuesta) => console.log(respuesta.message));
-  //   } catch (error) {
-
-  //   }
-  // };
 
   const [credenciales, setCredenciales] = useState({
     documento: "",
@@ -98,7 +66,7 @@ function Login() {
       setEstadoDocumento(false);
       setEstadoContrasena(false);
       await fetch(
-        `https://apilnfg-production.up.railway.app/apiLNFG/obtenerUsuarioDocumento/${credenciales.documento}`
+        `http://localhost:3000/apiLNFG/obtenerUsuarioDocumento/${credenciales.documento}`
       )
         .then((respuesta) => respuesta.json())
         .then((res) => {

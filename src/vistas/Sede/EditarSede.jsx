@@ -48,7 +48,7 @@ function EditarSede() {
       setEnviando(false);
     } else {
       try {
-        await fetch(`http://localhost:3000/apiLNFG/actualizarSede/${id}`, {
+        await fetch(`http://localhost:3000:3000/apiLNFG/actualizarSede/${id}`, {
           method: "PUT",
           headers: {
             "content-type": "application/json",
@@ -73,7 +73,7 @@ function EditarSede() {
   };
 
   const datosBd = async () => {
-    await fetch(`http://localhost:3000/apiLNFG/obtenerSede/${id}`)
+    await fetch(`http://localhost:3000:3000/apiLNFG/obtenerSede/${id}`)
       .then((res) => res.json())
       .then((respuesta) => {
         console.log(respuesta);

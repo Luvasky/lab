@@ -38,18 +38,17 @@ function CrearEmpresa() {
       setCamposVacios(true);
     } else {
       try {
-        await fetch(
-          "https://apilnfg-production.up.railway.app/apiLNFG/crearEmpresa",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              nombre: datosExamen.empresa.toUpperCase().trim(),
-            }),
-          }
-        ).then((res) => res.json().then((respuesta) => console.log(respuesta)));
+        await fetch("http://localhost:3000/apiLNFG/crearEmpresa", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nombre: datosExamen.empresa.toUpperCase().trim(),
+          }),
+        }).then((res) =>
+          res.json().then((respuesta) => console.log(respuesta))
+        );
         setCargando(false);
         setExitoso(true);
       } catch (error) {

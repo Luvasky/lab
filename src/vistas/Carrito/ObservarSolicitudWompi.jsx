@@ -30,7 +30,7 @@ function ObservarSolicitudWompi() {
   //     setBlock(true);
   //     setCargando(true); // Establecer cargando en true antes de la solicitud fetch
   //     try {
-  //       await fetch(`http://localhost:3000/apiLNFG/actualizarExamen/${id}`, {
+  //       await fetch(`http://localhost:3000:3000/apiLNFG/actualizarExamen/${id}`, {
   //         method: "PUT",
   //         headers: {
   //           "Content-Type": "application/json",
@@ -57,7 +57,7 @@ function ObservarSolicitudWompi() {
   const datosBd = async () => {
     try {
       await fetch(
-        `https://apilnfg-production.up.railway.app/apiLNFG/listarSlicitudWompiRef/${RefPago}`
+        `http://localhost:3000/apiLNFG/listarSlicitudWompiRef/${RefPago}`
       )
         .then((res) => res.json())
         .then((respuesta) => {

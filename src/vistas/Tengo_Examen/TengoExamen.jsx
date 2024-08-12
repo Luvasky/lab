@@ -88,25 +88,22 @@ function TengoExamen() {
       setObligatorios(true);
     } else {
       setEnviando(true);
-      await fetch(
-        "https://apilnfg-production.up.railway.app/apiLNFG/crearSolicitud",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json", // Tipo de contenido del cuerpo de la solicitud
-          },
-          body: JSON.stringify({
-            documento: datosPaciente.documento,
-            nombre: datosPaciente.nombre,
-            segundo_nombre: datosPaciente.segundoNombre,
-            primer_apellido: datosPaciente.primerApellido,
-            segundo_apellido: datosPaciente.segundoApellido,
-            fecha: datosSecundarios.fecha,
-            tipo_servicio: datosSecundarios.tipoServicio,
-            empresa: datosSecundarios.empresa,
-          }),
-        }
-      )
+      await fetch("http://localhost:3000/apiLNFG/crearSolicitud", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Tipo de contenido del cuerpo de la solicitud
+        },
+        body: JSON.stringify({
+          documento: datosPaciente.documento,
+          nombre: datosPaciente.nombre,
+          segundo_nombre: datosPaciente.segundoNombre,
+          primer_apellido: datosPaciente.primerApellido,
+          segundo_apellido: datosPaciente.segundoApellido,
+          fecha: datosSecundarios.fecha,
+          tipo_servicio: datosSecundarios.tipoServicio,
+          empresa: datosSecundarios.empresa,
+        }),
+      })
         .then((res) => res.json())
         .then((respuesta) => {
           notificacion();
@@ -119,9 +116,7 @@ function TengoExamen() {
 
   useEffect(() => {
     setCargando(true);
-    fetch(
-      `https://apilnfg-production.up.railway.app/apiLNFG/obtenerPacienteDocumento/${documento}`
-    )
+    fetch(`http://localhost:3000/apiLNFG/obtenerPacienteDocumento/${documento}`)
       .then((res) => res.json())
       .then((respuesta) => {
         console.log(respuesta);
@@ -137,9 +132,7 @@ function TengoExamen() {
         // setCargando(false);
       });
 
-    fetch(
-      `https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaEmpresas`
-    )
+    fetch(`http://localhost:3000/apiLNFG/obtenerListaEmpresas`)
       .then((res) => res.json())
       .then((respuesta) => {
         console.log(respuesta);

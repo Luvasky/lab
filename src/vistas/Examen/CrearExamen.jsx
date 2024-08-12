@@ -92,7 +92,7 @@ function CrearExamen() {
     } else {
       try {
         const response = await fetch(
-          "https://apilnfg-production.up.railway.app/apiLNFG/crearExamen",
+          "http://localhost:3000/apiLNFG/crearExamen",
           {
             method: "POST",
             headers: {

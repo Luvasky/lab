@@ -36,9 +36,7 @@ function IngresarCampos() {
 
   const datosTecnico = async () => {
     setLoading(true); // Iniciar carga
-    await fetch(
-      "https://apilnfg-production.up.railway.app/apiLNFG/obtenerTecnico"
-    )
+    await fetch("http://localhost:3000/apiLNFG/obtenerTecnico")
       .then((res) => res.json())
       .then((respuesta) => {
         const tecnicos = respuesta.respuesta.map((tecnico) => ({

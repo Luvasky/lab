@@ -39,19 +39,16 @@ function Olvido() {
       setCamposVacios(true);
     } else {
       try {
-        const response = await fetch(
-          "https://apilnfg-production.up.railway.app/apiLNFG/olvido",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              documento: datosExamen.documento.toUpperCase().trim(),
-              correo: datosExamen.correo.trim(),
-            }),
-          }
-        );
+        const response = await fetch("http://localhost:3000/apiLNFG/olvido", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            documento: datosExamen.documento.toUpperCase().trim(),
+            correo: datosExamen.correo.trim(),
+          }),
+        });
 
         if (response.ok) {
           const respuesta = await response.json();

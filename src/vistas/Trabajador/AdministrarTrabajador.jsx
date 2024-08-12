@@ -122,8 +122,7 @@ export default function AdministrarTrabajador() {
   const peticion = async () => {
     // setCargando(true);
 
-    const url =
-      "https://apilnfg-production.up.railway.app/apiLNFG/obtenerTrabajadores";
+    const url = "http://localhost:3000/apiLNFG/obtenerTrabajadores";
 
     await fetch(url)
       .then((response) => {
@@ -143,7 +142,7 @@ export default function AdministrarTrabajador() {
 
   const inhabilitar = async () => {
     // URL for the PUT request
-    const url = "https://apilnfg-production.up.railway.app/apiLNFG/inhabilitar";
+    const url = "http://localhost:3000/apiLNFG/inhabilitar";
 
     // Data to be sent in the request body (if needed)
     const data = {

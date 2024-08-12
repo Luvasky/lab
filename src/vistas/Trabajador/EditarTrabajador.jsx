@@ -93,7 +93,7 @@ function EditarTrabajador() {
     setComplete(true);
     if (estado.estado === "INACTIVO") {
       // Supongamos que 'url' es la dirección de tu servidor
-      const url = "https://apilnfg-production.up.railway.app/apiLNFG/habilitar";
+      const url = "http://localhost:3000/apiLNFG/habilitar";
 
       // Supongamos que 'data' es el cuerpo de la solicitud, si es necesario
       const data = {
@@ -128,8 +128,7 @@ function EditarTrabajador() {
         });
     } else {
       // Supongamos que 'url' es la dirección de tu servidor
-      const url =
-        "https://apilnfg-production.up.railway.app/apiLNFG/inhabilitar";
+      const url = "http://localhost:3000/apiLNFG/inhabilitar";
 
       // Supongamos que 'data' es el cuerpo de la solicitud, si es necesario
       const data = {
@@ -169,7 +168,7 @@ function EditarTrabajador() {
   const datosBd = async () => {
     try {
       await fetch(
-        `https://apilnfg-production.up.railway.app/apiLNFG/obtenerTrabajadorDocumento/${documento}`
+        `http://localhost:3000/apiLNFG/obtenerTrabajadorDocumento/${documento}`
       )
         .then((res) => res.json())
         .then((respuesta) => {
@@ -201,7 +200,7 @@ function EditarTrabajador() {
   };
 
   const capEstado = async () => {
-    const apiUrl = `https://apilnfg-production.up.railway.app/apiLNFG/obtenerUsuarioDocumento/${documento}`;
+    const apiUrl = `http://localhost:3000/apiLNFG/obtenerUsuarioDocumento/${documento}`;
 
     // Make the fetch request
     await fetch(apiUrl)
@@ -290,7 +289,7 @@ function EditarTrabajador() {
         setBlockButton(false);
       } else {
         await fetch(
-          `https://apilnfg-production.up.railway.app/apiLNFG/actualizarTrabajador/${documento}`,
+          `http://localhost:3000/apiLNFG/actualizarTrabajador/${documento}`,
           {
             method: "PUT",
             headers: {

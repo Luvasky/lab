@@ -39,9 +39,7 @@ function AdministrarSede() {
   };
 
   const datosBd = async () => {
-    await fetch(
-      "https://apilnfg-production.up.railway.app/apiLNFG/obtenetListaSede"
-    )
+    await fetch("http://localhost:3000/apiLNFG/obtenetListaSede")
       .then((res) => res.json())
       .then((respuesta) => {
         // setDatos({

@@ -141,7 +141,7 @@ export default function ExamenesTencnico() {
     setCargando(true);
     try {
       const resul = await fetch(
-        `https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaOrdenTecnico/${documento}`,
+        `http://localhost:3000/apiLNFG/obtenerListaOrdenTecnico/${documento}`,
         {
           method: "GET",
         }
@@ -216,7 +216,7 @@ export default function ExamenesTencnico() {
     }
 
     // setCancelado(true);
-    await fetch(`https://apilnfg-production.up.railway.app/apiLNFG/realizada`, {
+    await fetch(`http://localhost:3000/apiLNFG/realizada`, {
       method: "PUT", // O el método que estés utilizando
       headers: {
         "Content-Type": "application/json",
@@ -263,7 +263,7 @@ export default function ExamenesTencnico() {
     }
 
     // setCancelado(true);
-    await fetch(`https://apilnfg-production.up.railway.app/apiLNFG/rechazada`, {
+    await fetch(`http://localhost:3000/apiLNFG/rechazada`, {
       method: "PUT", // O el método que estés utilizando
       headers: {
         "Content-Type": "application/json",

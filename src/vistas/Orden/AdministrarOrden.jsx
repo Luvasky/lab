@@ -80,7 +80,7 @@ export default function AdministrarOrden() {
     setCargando(true);
     try {
       const resul = await fetch(
-        "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaOrden",
+        "http://localhost:3000/apiLNFG/obtenerListaOrden",
         {
           method: "GET",
         }

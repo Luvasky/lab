@@ -51,22 +51,19 @@ function EditarPaquete() {
       setCamposVacios(true);
     } else {
       setEnviando(true);
-      await fetch(
-        `https://apilnfg-production.up.railway.app/apiLNFG/actualizarPaquete/${id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      await fetch(`http://localhost:3000/apiLNFG/actualizarPaquete/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
 
-          body: JSON.stringify({
-            nombre: datos.nombre.toUpperCase().trim(),
-            precio: datos.precio,
-            descripcion: datos.descripcion.toUpperCase().trim(),
-            examenes: datos.examenes.toUpperCase().trim(),
-          }),
-        }
-      )
+        body: JSON.stringify({
+          nombre: datos.nombre.toUpperCase().trim(),
+          precio: datos.precio,
+          descripcion: datos.descripcion.toUpperCase().trim(),
+          examenes: datos.examenes.toUpperCase().trim(),
+        }),
+      })
         .then((res) => res.json())
         .then((respuesta) => {
           console.log(respuesta);
@@ -85,9 +82,7 @@ function EditarPaquete() {
   };
 
   const datosBd = async () => {
-    await fetch(
-      `https://apilnfg-production.up.railway.app/apiLNFG/obtenerPaqueteId/${id}`
-    )
+    await fetch(`http://localhost:3000/apiLNFG/obtenerPaqueteId/${id}`)
       .then((res) => res.json())
       .then((respuesta) => {
         console.log(respuesta.respuesta[0]);

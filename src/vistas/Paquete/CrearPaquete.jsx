@@ -85,7 +85,7 @@ function CrearPaquete() {
     } else {
       setEnviando(true);
       const response = await fetch(
-        "https://apilnfg-production.up.railway.app/apiLNFG/crearPaquete",
+        "http://localhost:3000/apiLNFG/crearPaquete",
         {
           method: "POST",
           headers: {
@@ -125,7 +125,7 @@ function CrearPaquete() {
     setCargando(true);
     try {
       const response = await fetch(
-        "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaExamenes"
+        "http://localhost:3000/apiLNFG/obtenerListaExamenes"
       );
       const data = await response.json();
 

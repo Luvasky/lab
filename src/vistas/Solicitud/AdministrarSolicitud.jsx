@@ -68,14 +68,14 @@ export default function AdministrarSolicitud() {
     setCargando(true);
     try {
       const resul = await fetch(
-        "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaSolicitud",
+        "http://localhost:3000/apiLNFG/obtenerListaSolicitud",
         {
           method: "GET",
         }
       )
         .then((res) => res.json())
         .then((respuesta) => {
-          console.log(respuesta.respuesta);
+          console.log(respuesta);
           setExamenes(respuesta.respuesta);
           setCargando(false);
         });
@@ -92,18 +92,15 @@ export default function AdministrarSolicitud() {
       return;
     }
 
-    await fetch(
-      `https://apilnfg-production.up.railway.app/apiLNFG/asignarTomada`,
-      {
-        method: "PUT", // O el método que estés utilizando
-        headers: {
-          "Content-Type": "application/json",
-          // Agrega cualquier otra cabecera necesaria aquí
-        },
-        // Puedes incluir un cuerpo de datos si es necesario
-        body: JSON.stringify({ idOrden: id_solicitud }),
-      }
-    )
+    await fetch(`http://localhost:3000/apiLNFG/asignarTomada`, {
+      method: "PUT", // O el método que estés utilizando
+      headers: {
+        "Content-Type": "application/json",
+        // Agrega cualquier otra cabecera necesaria aquí
+      },
+      // Puedes incluir un cuerpo de datos si es necesario
+      body: JSON.stringify({ idOrden: id_solicitud }),
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -155,7 +152,7 @@ export default function AdministrarSolicitud() {
       ) : (
         <div style={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={examenes}
+            rows={examenes || ""}
             columns={columns}
             pageSize={rowsPerPage}
             page={page}

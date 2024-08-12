@@ -149,31 +149,28 @@ function CrearCuenta() {
         }
         console.log(capturar);
 
-        await fetch(
-          "https://apilnfg-production.up.railway.app/apiLNFG/crearTrabajador",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json", // Tipo de contenido del cuerpo de la solicitud
-            },
-            body: JSON.stringify({
-              tipo_documento: capturar.tipoDocumento.toUpperCase().trim(),
-              documento: capturar.numeroDocumento.trim(),
-              nombre: capturar.nombre.toUpperCase().trim(),
-              segundo_nombre: capturar.segundoNombre.toUpperCase().trim(),
-              primer_apellido: capturar.primerApellido.toUpperCase().trim(),
-              segundo_apellido: capturar.segundoApellido.toUpperCase().trim(),
-              edad: capturar.edad.trim(),
-              rol: capturar.rol.toUpperCase().trim(),
-              email: capturar.email.trim(),
-              fecha_nacimiento: capturar.fechaNacimiento.trim(),
-              celular: capturar.celular.trim(),
-              contrasena: capturar.contrasena.trim(),
-              sexo: capturar.sexo.toUpperCase().trim(),
-              estado: "ACTIVO".toUpperCase().trim(),
-            }),
-          }
-        ).then((respuesta) => {
+        await fetch("http://localhost:3000/apiLNFG/crearTrabajador", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", // Tipo de contenido del cuerpo de la solicitud
+          },
+          body: JSON.stringify({
+            tipo_documento: capturar.tipoDocumento.toUpperCase().trim(),
+            documento: capturar.numeroDocumento.trim(),
+            nombre: capturar.nombre.toUpperCase().trim(),
+            segundo_nombre: capturar.segundoNombre.toUpperCase().trim(),
+            primer_apellido: capturar.primerApellido.toUpperCase().trim(),
+            segundo_apellido: capturar.segundoApellido.toUpperCase().trim(),
+            edad: capturar.edad.trim(),
+            rol: capturar.rol.toUpperCase().trim(),
+            email: capturar.email.trim(),
+            fecha_nacimiento: capturar.fechaNacimiento.trim(),
+            celular: capturar.celular.trim(),
+            contrasena: capturar.contrasena.trim(),
+            sexo: capturar.sexo.toUpperCase().trim(),
+            estado: "ACTIVO".toUpperCase().trim(),
+          }),
+        }).then((respuesta) => {
           respuesta.json();
 
           if (respuesta.status == 200) {

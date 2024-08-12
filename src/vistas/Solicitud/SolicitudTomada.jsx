@@ -53,7 +53,7 @@ export default function SolicitudTomada() {
     setCargando(true);
     try {
       const resul = await fetch(
-        "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaSolicitudTomada",
+        "http://localhost:3000/apiLNFG/obtenerListaSolicitudTomada",
         {
           method: "GET",
         }

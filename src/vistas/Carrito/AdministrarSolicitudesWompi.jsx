@@ -63,18 +63,15 @@ export default function AdministrarSolicitudesWompi() {
       return;
     }
 
-    await fetch(
-      `https://apilnfg-production.up.railway.app/apiLNFG/wompiTomada`,
-      {
-        method: "POST", // O el método que estés utilizando
-        headers: {
-          "Content-Type": "application/json",
-          // Agrega cualquier otra cabecera necesaria aquí
-        },
-        // Puedes incluir un cuerpo de datos si es necesario
-        body: JSON.stringify({ idOrden: idSolicitud }),
-      }
-    )
+    await fetch(`http://localhost:3000/apiLNFG/wompiTomada`, {
+      method: "POST", // O el método que estés utilizando
+      headers: {
+        "Content-Type": "application/json",
+        // Agrega cualquier otra cabecera necesaria aquí
+      },
+      // Puedes incluir un cuerpo de datos si es necesario
+      body: JSON.stringify({ idOrden: idSolicitud }),
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -99,7 +96,7 @@ export default function AdministrarSolicitudesWompi() {
     setCargando(true);
     try {
       const resul = await fetch(
-        "https://apilnfg-production.up.railway.app/apiLNFG/obtenerListaSolicitudWompi",
+        "http://localhost:3000/apiLNFG/obtenerListaSolicitudWompi",
         {
           method: "GET",
         }

@@ -15,7 +15,7 @@ function Imprimir() {
       const nuevosDatosMostrar = []; // Nuevo array para almacenar datos de cada iteración
 
       const response = await fetch(
-        `https://apilnfg-production.up.railway.app/apiLNFG/ImprimirOrden/${datosBusqueda.documento}`,
+        `http://localhost:3000/apiLNFG/ImprimirOrden/${datosBusqueda.documento}`,
         {
           method: "POST",
           headers: {
@@ -54,7 +54,7 @@ function Imprimir() {
   const datosPaciente = async (idPaciente) => {
     try {
       const response = await fetch(
-        `https://apilnfg-production.up.railway.app/apiLNFG/obtenerPacienteDocumento/${idPaciente}`,
+        `http://localhost:3000/apiLNFG/obtenerPacienteDocumento/${idPaciente}`,
         {
           method: "GET",
           headers: {

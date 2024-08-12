@@ -43,7 +43,7 @@ function CrearSede() {
     } else {
       try {
         const response = await fetch(
-          "http://localhost:3000/apiLNFG/crearSede",
+          "http://localhost:3000:3000/apiLNFG/crearSede",
           {
             method: "POST",
             headers: {
